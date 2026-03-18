@@ -5,7 +5,9 @@
   "main": "server.js",
   "type": "module",
   "scripts": {
-    "dev": "node server.js"
+    "dev": "node server.js",
+    "seed": "node scripts/seedProducts.js",
+    "images": "node scripts/updateProductImages.js"
   },
   "keywords": [],
   "author": "",

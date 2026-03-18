@@ -1,30 +1,22 @@
-import { useEffect, useState } from "react";
+import { Routes, Route } from "react-router-dom";
+import Navbar from "./components/Navbar/Navbar";
+import HomePage from "./pages/HomePage/HomePage";
+import MenuPage from "./pages/MenuPage/MenuPage";
+import ProductDetailPage from "./pages/ProductDetailPage/ProductDetailPage";
+import AdminProductsPage from "./pages/AdminProductsPage/AdminProductsPage";
 
 function App() {
-  const [products, setProducts] = useState([]);
-
-  useEffect(() => {
-    fetch("http://localhost:3000/api/products")
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data); // debug
-        setProducts(data);
-      })
-      .catch((err) => console.error(err));
-  }, []);
-
   return (
-    <div>
-      <h1>Sweetie Bakery Menu</h1>
+    <>
+      <Navbar />
 
-      {products.map((p) => (
-        <div key={p._id}>
-          <h3>{p.name}</h3>
-          <p>{p.category}</p>
-          <p>${p.price}</p>
-        </div>
-      ))}
-    </div>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/menu" element={<MenuPage />} />
+        <Route path="/products/:id" element={<ProductDetailPage />} />
+        <Route path="/admin/products" element={<AdminProductsPage />} />
+      </Routes>
+    </>
   );
 }
 
