@@ -11,6 +11,7 @@ router.get('/', async (req, res) => {
     const orders = await db.collection('orders').find({}).toArray();
     res.status(200).json(orders);
   } catch (error) {
+    console.error('GET /api/orders error:', error);
     res.status(500).json({ error: 'Failed to fetch orders' });
   }
 });
@@ -29,6 +30,7 @@ router.post('/', async (req, res) => {
       .status(201)
       .json({ message: 'Order created', orderId: result.insertedId });
   } catch (error) {
+    console.error('POST /api/orders error:', error);
     res.status(500).json({ error: 'Failed to create order' });
   }
 });
@@ -49,6 +51,7 @@ router.put('/:id', async (req, res) => {
     }
     res.status(200).json({ message: 'Order updated successfully' });
   } catch (error) {
+    console.error('PUT /api/orders error:', error);
     res.status(500).json({ error: 'Failed to update order' });
   }
 });
@@ -68,6 +71,7 @@ router.delete('/:id', async (req, res) => {
     }
     res.status(200).json({ message: 'Order deleted successfully' });
   } catch (error) {
+    console.error('DELETE /api/orders error:', error);
     res.status(500).json({ error: 'Failed to delete order' });
   }
 });

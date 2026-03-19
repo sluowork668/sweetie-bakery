@@ -43,6 +43,7 @@ router.get('/:id', async (req, res) => {
 
     res.json(product);
   } catch (err) {
+    console.error('GET single product error:', err);
     res.status(500).json({ error: 'Failed to fetch product' });
   }
 });
@@ -70,6 +71,7 @@ router.post('/', async (req, res) => {
     const result = await db.collection('products').insertOne(newProduct);
     res.status(201).json({ ...newProduct, _id: result.insertedId });
   } catch (err) {
+    console.error('POST product error:', err);
     res.status(500).json({ error: 'Failed to create product' });
   }
 });
@@ -79,7 +81,9 @@ router.put('/:id', async (req, res) => {
   try {
     const db = getDb();
     const { id } = req.params;
-    const { _id, ...updatedData } = req.body;
+    
+    const updatedData = { ...req.body };
+    delete updatedData._id;
 
     let query = { id: id };
     if (ObjectId.isValid(id)) {
