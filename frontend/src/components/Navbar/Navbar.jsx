@@ -1,5 +1,5 @@
-import { Link } from "react-router-dom";
-import "./Navbar.css";
+import { NavLink } from 'react-router-dom';
+import './Navbar.css';
 
 function Navbar() {
   return (
@@ -7,10 +7,13 @@ function Navbar() {
       <div className="navbar-brand">Sweetie Bakery</div>
 
       <div className="navbar-links">
-        <Link to="/">Home</Link>
-        <Link to="/menu">Menu</Link>
-        <Link to="/menu">Order</Link>
-        <Link to="/admin/products">Admin</Link>
+        <NavLink to="/" end>
+          Home
+        </NavLink>
+        <NavLink to="/menu">Menu</NavLink>
+        <NavLink to="/order">Order</NavLink>
+        <NavLink to="/admin/products">Admin - Menu</NavLink>
+        <NavLink to="/admin/orders">Admin - Orders</NavLink>
       </div>
     </nav>
   );

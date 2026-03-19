@@ -1,25 +1,25 @@
-import { useEffect, useMemo, useState } from "react";
-import ProductForm from "../../components/ProductForm/ProductForm";
-import "./AdminProductsPage.css";
+import { useEffect, useMemo, useState } from 'react';
+import ProductForm from '../../components/ProductForm/ProductForm';
+import './AdminProductsPage.css';
 
-const API_BASE_URL = "http://localhost:3000/api/products";
+const API_BASE_URL = 'http://localhost:3000/api/products';
 
 function AdminProductsPage() {
   const [products, setProducts] = useState([]);
   const [editingProduct, setEditingProduct] = useState(null);
 
-  const [searchTerm, setSearchTerm] = useState("");
-  const [selectedCategory, setSelectedCategory] = useState("all");
+  const [searchTerm, setSearchTerm] = useState('');
+  const [selectedCategory, setSelectedCategory] = useState('all');
   const [showAvailableOnly, setShowAvailableOnly] = useState(false);
 
   const fetchProducts = () => {
     fetch(API_BASE_URL)
       .then((res) => res.json())
       .then((data) => {
-        console.log("Admin fetched products:", data);
+        console.log('Admin fetched products:', data);
         setProducts(data);
       })
-      .catch((err) => console.error("Failed to fetch products:", err));
+      .catch((err) => console.error('Failed to fetch products:', err));
   };
 
   useEffect(() => {
@@ -29,16 +29,16 @@ function AdminProductsPage() {
   const handleAddProduct = async (newProduct) => {
     try {
       const res = await fetch(API_BASE_URL, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(newProduct),
       });
 
       const data = await res.json();
-      if (!res.ok) throw new Error(data.error || "Failed to add product");
+      if (!res.ok) throw new Error(data.error || 'Failed to add product');
 
       setProducts((prev) => [...prev, data]);
-      alert("Product added successfully!");
+      alert('Product added successfully!');
     } catch (err) {
       alert(err.message);
     }
@@ -50,26 +50,26 @@ function AdminProductsPage() {
 
       if (!productId) {
         alert(
-          "Error: Product _id is missing! Make sure the product is saved in DB.",
+          'Error: Product _id is missing! Make sure the product is saved in DB.'
         );
         return;
       }
 
       const res = await fetch(`${API_BASE_URL}/${productId}`, {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(updatedProduct),
       });
 
       const data = await res.json();
-      if (!res.ok) throw new Error(data.error || "Failed to update product");
+      if (!res.ok) throw new Error(data.error || 'Failed to update product');
 
       setProducts((prev) => prev.map((p) => (p._id === productId ? data : p)));
       setEditingProduct(null);
-      alert("Product updated successfully!");
+      alert('Product updated successfully!');
     } catch (err) {
-      console.error("Update failed:", err);
-      alert("Update failed: " + err.message);
+      console.error('Update failed:', err);
+      alert('Update failed: ' + err.message);
     }
   };
 
@@ -78,7 +78,7 @@ function AdminProductsPage() {
 
     if (!productId) {
       alert(
-        "Error: This product does not have a database _id and cannot be deleted.",
+        'Error: This product does not have a database _id and cannot be deleted.'
       );
       return;
     }
@@ -88,16 +88,16 @@ function AdminProductsPage() {
 
     try {
       const res = await fetch(`${API_BASE_URL}/${productId}`, {
-        method: "DELETE",
+        method: 'DELETE',
       });
 
-      if (!res.ok) throw new Error("Failed to delete product");
+      if (!res.ok) throw new Error('Failed to delete product');
 
       setProducts((prev) => prev.filter((p) => p._id !== productId));
-      alert("Product deleted successfully!");
+      alert('Product deleted successfully!');
     } catch (err) {
-      console.error("Delete failed:", err);
-      alert("Delete failed: " + err.message);
+      console.error('Delete failed:', err);
+      alert('Delete failed: ' + err.message);
     }
   };
 
@@ -116,18 +116,18 @@ function AdminProductsPage() {
   const filteredProducts = useMemo(() => {
     return products.filter((product) => {
       const isSynthetic = product.isSample === true;
-      const isSearchingSample = searchTerm.toLowerCase().includes("sample");
+      const isSearchingSample = searchTerm.toLowerCase().includes('sample');
 
       if (isSynthetic && !isSearchingSample) return false;
 
-      const name = product.name || "";
-      const desc = product.description || "";
+      const name = product.name || '';
+      const desc = product.description || '';
       const matchesSearch =
         name.toLowerCase().includes(searchTerm.toLowerCase()) ||
         desc.toLowerCase().includes(searchTerm.toLowerCase());
 
       const matchesCategory =
-        selectedCategory === "all" || product.category === selectedCategory;
+        selectedCategory === 'all' || product.category === selectedCategory;
 
       return matchesSearch && matchesCategory;
     });
@@ -187,23 +187,23 @@ function AdminProductsPage() {
                   alt={product.name}
                   className="admin-thumbnail"
                   style={{
-                    width: "60px",
-                    height: "60px",
-                    objectFit: "cover",
-                    borderRadius: "4px",
+                    width: '60px',
+                    height: '60px',
+                    objectFit: 'cover',
+                    borderRadius: '4px',
                   }}
                 />
               ) : (
                 <div
                   style={{
-                    width: "60px",
-                    height: "60px",
-                    backgroundColor: "#eee",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    fontSize: "10px",
-                    color: "#999",
+                    width: '60px',
+                    height: '60px',
+                    backgroundColor: '#eee',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    fontSize: '10px',
+                    color: '#999',
                   }}
                 >
                   No Image
@@ -213,17 +213,17 @@ function AdminProductsPage() {
 
             <div className="admin-product-info">
               <div
-                style={{ display: "flex", alignItems: "center", gap: "8px" }}
+                style={{ display: 'flex', alignItems: 'center', gap: '8px' }}
               >
                 <h3>{product.name}</h3>
                 {product.isSample && (
                   <span
                     style={{
-                      fontSize: "10px",
-                      backgroundColor: "#f0f0f0",
-                      padding: "2px 6px",
-                      borderRadius: "10px",
-                      color: "#666",
+                      fontSize: '10px',
+                      backgroundColor: '#f0f0f0',
+                      padding: '2px 6px',
+                      borderRadius: '10px',
+                      color: '#666',
                     }}
                   >
                     Synthetic

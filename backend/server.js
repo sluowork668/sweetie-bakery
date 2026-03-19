@@ -1,8 +1,8 @@
-import express from "express";
-import dotenv from "dotenv";
-import { connectToMongo } from "./db/mongo.js";
-import productsRouter from "./routes/products.routes.js";
-import ordersRouter from "./routes/orders.routes.js";
+import express from 'express';
+import dotenv from 'dotenv';
+import { connectToMongo } from './db/mongo.js';
+import productsRouter from './routes/products.routes.js';
+import ordersRouter from './routes/orders.routes.js';
 
 dotenv.config();
 
@@ -12,26 +12,26 @@ const PORT = process.env.PORT || 3000;
 app.use(express.json());
 
 app.use((req, res, next) => {
-  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader(
-    "Access-Control-Allow-Methods",
-    "GET, POST, PUT, DELETE, OPTIONS",
+    'Access-Control-Allow-Methods',
+    'GET, POST, PUT, DELETE, OPTIONS'
   );
-  res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
 
-  if (req.method === "OPTIONS") {
+  if (req.method === 'OPTIONS') {
     return res.sendStatus(200);
   }
 
   next();
 });
 
-app.get("/health", (req, res) => {
-  res.json({ status: "ok" });
+app.get('/health', (req, res) => {
+  res.json({ status: 'ok' });
 });
 
-app.use("/api/products", productsRouter);
-app.use("/api/orders", ordersRouter);
+app.use('/api/products', productsRouter);
+app.use('/api/orders', ordersRouter);
 
 const startServer = async () => {
   try {
@@ -41,7 +41,7 @@ const startServer = async () => {
       console.log(`Server running on port ${PORT}`);
     });
   } catch (err) {
-    console.error("Error starting server:", err);
+    console.error('Error starting server:', err);
   }
 };
 

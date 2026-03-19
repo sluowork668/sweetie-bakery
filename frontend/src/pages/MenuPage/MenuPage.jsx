@@ -1,20 +1,20 @@
-import { useEffect, useMemo, useState } from "react";
-import ProductCard from "../../components/ProductCard/ProductCard";
-import ProductFilter from "../../components/ProductFilter/ProductFilter";
-import "./MenuPage.css";
+import { useEffect, useMemo, useState } from 'react';
+import ProductCard from '../../components/ProductCard/ProductCard';
+import ProductFilter from '../../components/ProductFilter/ProductFilter';
+import './MenuPage.css';
 
 function MenuPage() {
   const [products, setProducts] = useState([]);
-  const [selectedCategory, setSelectedCategory] = useState("all");
+  const [selectedCategory, setSelectedCategory] = useState('all');
 
   useEffect(() => {
-    fetch("http://localhost:3000/api/products")
+    fetch('http://localhost:3000/api/products')
       .then((res) => res.json())
       .then((data) => {
-        console.log("Menu fetched products:", data.length);
+        console.log('Menu fetched products:', data.length);
         setProducts(data);
       })
-      .catch((err) => console.error("Failed to fetch products:", err));
+      .catch((err) => console.error('Failed to fetch products:', err));
   }, []);
 
   const realProducts = useMemo(() => {
@@ -27,7 +27,7 @@ function MenuPage() {
 
   const filteredProducts = useMemo(() => {
     return realProducts.filter((product) => {
-      if (selectedCategory === "all") return true;
+      if (selectedCategory === 'all') return true;
       return product.category === selectedCategory;
     });
   }, [realProducts, selectedCategory]);

@@ -31,3 +31,7 @@
 .navbar-links a:hover {
   color: #c46027;
 }
+
+.navbar-links a.active {
+  text-decoration: underline;
+}

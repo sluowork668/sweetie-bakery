@@ -1,0 +1,63 @@
+.admin-orders-container {
+  max-width: 1000px;
+  margin: 2rem auto;
+  padding: 1rem;
+}
+
+.orders-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+.orders-table th,
+.orders-table td {
+  padding: 1rem;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+.orders-table th {
+  background-color: #f8f9fa;
+  font-weight: bold;
+}
+
+.status-select {
+  padding: 0.5rem;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+/* Dynamic status colors */
+.status-select.pending {
+  background-color: #fff3cd;
+  color: #856404;
+}
+.status-select.in-progress {
+  background-color: #cce5ff;
+  color: #004085;
+}
+.status-select.completed {
+  background-color: #d4edda;
+  color: #155724;
+}
+.status-select.cancelled {
+  background-color: #f8d7da;
+  color: #721c24;
+}
+
+.delete-btn {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.delete-btn:hover {
+  background-color: #c82333;
+}

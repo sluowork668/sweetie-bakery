@@ -1,5 +1,5 @@
-import PropTypes from "prop-types";
-import "./ProductFilter.css";
+import PropTypes from 'prop-types';
+import './ProductFilter.css';
 
 function ProductFilter({ categories, selectedCategory, onCategoryChange }) {
   return (

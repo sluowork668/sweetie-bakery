@@ -6,7 +6,7 @@
 /* Hero */
 .hero-section {
   min-height: 78vh;
-  background-image: url("/images/products/mochi-donuts-box.jpg");
+  background-image: url('/images/products/mochi-donuts-box.jpg');
   background-size: cover;
   background-position: center;
   position: relative;

@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
-import { useParams, Link } from "react-router-dom";
-import "./ProductDetailPage.css";
+import { useEffect, useState } from 'react';
+import { useParams, Link } from 'react-router-dom';
+import './ProductDetailPage.css';
 
 function ProductDetailPage() {
   const { id } = useParams();
@@ -10,7 +10,7 @@ function ProductDetailPage() {
     fetch(`http://localhost:3000/api/products/${id}`)
       .then((res) => res.json())
       .then((data) => setProduct(data))
-      .catch((err) => console.error("Failed to fetch product:", err));
+      .catch((err) => console.error('Failed to fetch product:', err));
   }, [id]);
 
   if (!product) {

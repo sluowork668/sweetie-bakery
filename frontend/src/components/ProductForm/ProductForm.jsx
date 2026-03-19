@@ -1,15 +1,15 @@
-import { useEffect, useState } from "react";
-import PropTypes from "prop-types";
-import "./ProductForm.css";
+import { useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
+import './ProductForm.css';
 
 const emptyForm = {
-  _id: "",
-  id: "",
-  name: "",
-  category: "dessert",
-  price: "",
-  description: "",
-  imageUrl: "",
+  _id: '',
+  id: '',
+  name: '',
+  category: 'dessert',
+  price: '',
+  description: '',
+  imageUrl: '',
   available: true,
   isSample: false,
 };
@@ -20,13 +20,13 @@ function ProductForm({ onSubmit, editingProduct, onCancel }) {
   useEffect(() => {
     if (editingProduct) {
       setFormData({
-        _id: editingProduct._id || "",
-        id: editingProduct.id || "",
-        name: editingProduct.name || "",
-        category: editingProduct.category || "dessert",
-        price: editingProduct.price ?? "",
-        description: editingProduct.description || "",
-        imageUrl: editingProduct.imageUrl || "",
+        _id: editingProduct._id || '',
+        id: editingProduct.id || '',
+        name: editingProduct.name || '',
+        category: editingProduct.category || 'dessert',
+        price: editingProduct.price ?? '',
+        description: editingProduct.description || '',
+        imageUrl: editingProduct.imageUrl || '',
         available: editingProduct.available ?? true,
         isSample: editingProduct.isSample ?? false,
       });
@@ -39,7 +39,7 @@ function ProductForm({ onSubmit, editingProduct, onCancel }) {
     const { name, value, type, checked } = e.target;
     setFormData((prev) => ({
       ...prev,
-      [name]: type === "checkbox" ? checked : value,
+      [name]: type === 'checkbox' ? checked : value,
     }));
   };
 
@@ -61,7 +61,7 @@ function ProductForm({ onSubmit, editingProduct, onCancel }) {
 
   return (
     <form className="product-form" onSubmit={handleSubmit}>
-      <h2>{editingProduct ? "Edit Product" : "Add Product"}</h2>
+      <h2>{editingProduct ? 'Edit Product' : 'Add Product'}</h2>
 
       <input
         type="text"
@@ -129,7 +129,7 @@ function ProductForm({ onSubmit, editingProduct, onCancel }) {
 
       <div className="product-form-buttons">
         <button type="submit">
-          {editingProduct ? "Update Product" : "Add Product"}
+          {editingProduct ? 'Update Product' : 'Add Product'}
         </button>
 
         {editingProduct && (
