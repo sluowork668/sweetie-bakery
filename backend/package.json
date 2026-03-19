@@ -7,6 +7,8 @@
   "scripts": {
     "dev": "node server.js",
     "seed": "node scripts/seedProducts.js",
+    "lint": "eslint .",
+    "format": "prettier --write .",
     "images": "node scripts/updateProductImages.js"
   },
   "keywords": [],

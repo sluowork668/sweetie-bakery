@@ -1,0 +1,30 @@
+services:
+  mongodb:
+    image: mongo:latest
+    container_name: sweetie-mongo
+    ports:
+      - "27017:27017"
+    restart: unless-stopped
+
+  backend:
+    build: ./backend
+    container_name: sweetie-backend
+    ports:
+      - "3000:3000"
+    env_file:
+      - .env
+    depends_on:
+      - mongodb
+    restart: unless-stopped
+
+  frontend:
+    build: ./frontend
+    container_name: sweetie-frontend
+    ports:
+      - "5173:5173"
+    depends_on:
+      - backend
+    volumes:
+      - ./frontend/src:/app/src
+      - ./frontend/public:/app/public
+    restart: unless-stopped

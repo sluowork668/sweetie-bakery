@@ -2,6 +2,7 @@ import express from "express";
 import dotenv from "dotenv";
 import { connectToMongo } from "./db/mongo.js";
 import productsRouter from "./routes/products.routes.js";
+import ordersRouter from "./routes/orders.routes.js";
 
 dotenv.config();
 
@@ -30,6 +31,7 @@ app.get("/health", (req, res) => {
 });
 
 app.use("/api/products", productsRouter);
+app.use("/api/orders", ordersRouter);
 
 const startServer = async () => {
   try {
