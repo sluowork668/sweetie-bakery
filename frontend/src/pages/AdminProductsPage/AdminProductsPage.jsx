@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState } from 'react';
 import ProductForm from '../../components/ProductForm/ProductForm';
 import './AdminProductsPage.css';
 
-const API_BASE_URL = 'http://localhost:3000/api/products';
+const API_BASE_URL = '/api/products';
 
 function AdminProductsPage() {
   const [products, setProducts] = useState([]);

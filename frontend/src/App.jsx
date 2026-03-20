@@ -1,28 +1,32 @@
+import { useState } from 'react'; // 1. Added this import
 import { Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar/Navbar';
 import HomePage from './pages/HomePage/HomePage';
 import MenuPage from './pages/MenuPage/MenuPage';
 import ProductDetailPage from './pages/ProductDetailPage/ProductDetailPage';
 import AdminProductsPage from './pages/AdminProductsPage/AdminProductsPage';
-
-// Import your new pages
 import OrderPage from './pages/OrderPage/OrderPage';
 import AdminOrdersPage from './pages/AdminOrdersPage/AdminOrdersPage';
+import LoginPage from './pages/LoginPage/LoginPage';
 
 function App() {
+  // 2. Define the state here. Initially, 'user' is null (logged out).
+  const [user, setUser] = useState(null);
+
   return (
     <>
-      <Navbar />
+      <Navbar user={user} setUser={setUser} />
 
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/menu" element={<MenuPage />} />
-        <Route path="/products/:id" element={<ProductDetailPage />} />
-        <Route path="/admin/products" element={<AdminProductsPage />} />
-
-        {/* Hazem's Routes */}
         <Route path="/order" element={<OrderPage />} />
+        <Route path="/products/:id" element={<ProductDetailPage />} />
+        
+        <Route path="/login" element={<LoginPage setUser={setUser} />} />
+        
         <Route path="/admin/orders" element={<AdminOrdersPage />} />
+        <Route path="/admin/products" element={<AdminProductsPage />} />
       </Routes>
     </>
   );

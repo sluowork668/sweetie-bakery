@@ -8,7 +8,7 @@ function MenuPage() {
   const [selectedCategory, setSelectedCategory] = useState('all');
 
   useEffect(() => {
-    fetch('http://localhost:3000/api/products')
+    fetch('/api/products')
       .then((res) => res.json())
       .then((data) => {
         console.log('Menu fetched products:', data.length);

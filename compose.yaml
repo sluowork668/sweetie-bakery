@@ -5,6 +5,8 @@ services:
     ports:
       - "27017:27017"
     restart: unless-stopped
+    volumes:
+      - mongo-data:/data/db
 
   backend:
     build: ./backend
@@ -28,3 +30,6 @@ services:
       - ./frontend/src:/app/src
       - ./frontend/public:/app/public
     restart: unless-stopped
+
+volumes:
+  mongo-data:
