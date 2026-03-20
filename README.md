@@ -28,7 +28,7 @@ To build a full-stack web application using React (Vite), Node.js, Express, and 
 
 ## Slides
 
-[TODO: Insert Slides Link Here]
+https://docs.google.com/presentation/d/1z1r2y2nH-nTADN2mbPylbIjRJRxy4EKsmX5LBqWwsJ0/edit?usp=sharing
 
 ## Demo Video
 
