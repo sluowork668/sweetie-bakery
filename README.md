@@ -8,7 +8,7 @@ Hazem Algendy & Shuwen Luo
 
 ## Page Deployment Link
 
-[TODO: Insert Deployment Link Here]
+http://3.22.235.29:5173
 
 ## Class Link
 
