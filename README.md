@@ -16,7 +16,7 @@ https://northeastern.instructure.com/courses/245751
 
 ## Design Document
 
-[TODO: Insert Design Document Link Here]
+https://docs.google.com/document/d/1CukWKklPPVcqSHUShNHj-RulOKrdzGu_GBMLZSII6ig/edit?usp=sharing
 
 ## Project Objective
 
