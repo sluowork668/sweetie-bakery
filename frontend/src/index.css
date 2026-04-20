@@ -17,11 +17,11 @@
   --mono: 'JetBrains Mono', ui-monospace, Consolas, monospace;
 
   font: 18px/150% var(--sans); /* Increased line-height slightly for readability */
-  letter-spacing: 0.01em; 
+  letter-spacing: 0.01em;
   color-scheme: light dark;
   color: var(--text);
   background: var(--bg);
-  
+
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;

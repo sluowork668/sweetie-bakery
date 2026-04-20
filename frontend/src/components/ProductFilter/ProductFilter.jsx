@@ -2,9 +2,7 @@ import PropTypes from 'prop-types';
 import './ProductFilter.css';
 
 function ProductFilter({ categories, selectedCategory, onCategoryChange }) {
-  
-  const titleCase = (str) =>
-    str.replace(/\b\w/g, (c) => c.toUpperCase());
+  const titleCase = (str) => str.replace(/\b\w/g, (c) => c.toUpperCase());
 
   return (
     <div className="product-filter">

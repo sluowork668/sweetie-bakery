@@ -15,14 +15,14 @@ function HomePage() {
             </h1>
 
             <p className={styles.heroDescription}>
-              Sweetie Bakery offers handcrafted mochi donuts, savory buns, and 
-              classic artisan breads. Browse our collection and explore the 
-              rich flavors of our local favorites.
+              Sweetie Bakery offers handcrafted mochi donuts, savory buns, and
+              classic artisan breads. Browse our collection and explore the rich
+              flavors of our local favorites.
             </p>
 
             <div className={styles.heroButtons}>
-              <Link 
-                to="/menu" 
+              <Link
+                to="/menu"
                 className={`${styles.heroButton} ${styles.primary}`}
                 tabIndex="0"
                 aria-label="Browse full bakery menu"
@@ -39,7 +39,7 @@ function HomePage() {
         <article className={styles.infoCard}>
           <h3>Freshly Made</h3>
           <p>
-            Our menu includes mochi donuts, pastries, and artisanal breads 
+            Our menu includes mochi donuts, pastries, and artisanal breads
             prepared daily with high-quality, whole ingredients.
           </p>
         </article>
@@ -47,22 +47,25 @@ function HomePage() {
         <article className={styles.infoCard}>
           <h3>Local Favorite</h3>
           <p>
-            Proudly serving the Boston community with 
-            unique flavors and a handcrafted touch.
+            Proudly serving the Boston community with unique flavors and a
+            handcrafted touch.
           </p>
         </article>
 
         <article className={styles.infoCard}>
           <h3>Easy to Explore</h3>
           <p>
-            Quickly browse our full menu, check allergen information, and 
-            see real-time availability.
+            Quickly browse our full menu, check allergen information, and see
+            real-time availability.
           </p>
         </article>
       </section>
 
       {/* Bakery Credentials (Footer) */}
-      <footer className={styles.footerCredentials} aria-label="Bakery Information">
+      <footer
+        className={styles.footerCredentials}
+        aria-label="Bakery Information"
+      >
         <div className={styles.footerGrid}>
           <div className={styles.footerSection}>
             <h4>Visit Us</h4>
