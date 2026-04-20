@@ -20,11 +20,19 @@ router.get('/', async (req, res) => {
 router.post('/', async (req, res) => {
   try {
     const db = getDb();
+    
+    // Explicitly destructure the cart payload Shuwen will send
+    const { customerName, customerEmail, items, totalPrice } = req.body;
+
     const newOrder = {
-      ...req.body,
+      customerName: customerName || 'Guest',
+      customerEmail: customerEmail || '',
+      items: items || [], // Array of objects: { productId, name, qty, price }
+      totalPrice: Number(totalPrice) || 0,
       status: 'pending',
       createdAt: new Date(),
     };
+    
     const result = await db.collection('orders').insertOne(newOrder);
     res
       .status(201)

@@ -1,0 +1,96 @@
+.adminProductsPage {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 32px 20px;
+}
+
+.adminProductsPage h1 {
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.adminFilters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+  margin-bottom: 20px;
+  padding: 16px;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  background: white;
+}
+
+.adminFilters input,
+.adminFilters select {
+  padding: 10px 12px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
+}
+
+.adminFilters input:focus-visible,
+.adminFilters select:focus-visible {
+  outline: 3px solid var(--focus-ring);
+}
+
+.adminFilters input { flex: 1; min-width: 240px; }
+
+.adminResultsCount {
+  margin-bottom: 16px;
+  color: #555;
+  font-weight: 500;
+}
+
+.adminProductsList {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.adminProductCard {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+  padding: 16px;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  background: white;
+}
+
+.adminProductInfo { flex: 1; }
+.adminProductInfo h3 { margin-top: 0; }
+
+.adminProductActions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.editBtn {
+  padding: 8px 14px;
+  border: none;
+  border-radius: 8px;
+  background: var(--approve-bg);
+  color: white;
+  cursor: pointer;
+}
+
+.editBtn:hover { background: var(--approve-hover); }
+
+.deleteBtn {
+  padding: 8px 14px;
+  border: none;
+  border-radius: 8px;
+  background: var(--cancel-bg);
+  color: white;
+  cursor: pointer;
+}
+
+.deleteBtn:hover { background: var(--cancel-hover); }
+
+.editBtn:focus-visible,
+.deleteBtn:focus-visible {
+  outline: 3px solid var(--focus-ring);
+  outline-offset: 3px;
+}

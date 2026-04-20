@@ -59,8 +59,11 @@ router.post('/', async (req, res) => {
       price: Number(req.body.price),
       description: req.body.description || '',
       imageUrl: req.body.imageUrl || '',
-      available: req.body.available ?? true,
-      isSample: req.body.isSample ?? false,
+      ingredients: req.body.ingredients || '',
+      allergens: req.body.allergens || '',
+      calories: Number(req.body.calories) || 0,
+      flavorProfile: req.body.flavorProfile || '',
+      inStock: req.body.inStock ?? true, 
       createdAt: new Date(),
     };
 

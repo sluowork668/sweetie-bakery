@@ -1,7 +1,7 @@
 .menu-page {
-  max-width: 1100px;
-  margin: 0 auto;
   padding: 32px 20px;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .menu-page h1 {
@@ -11,6 +11,6 @@
 
 .product-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 20px;
 }

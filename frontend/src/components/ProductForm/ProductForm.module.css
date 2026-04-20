@@ -1,0 +1,77 @@
+.productForm {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 24px;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  background: white;
+  margin-bottom: 32px;
+}
+
+.input, .textarea {
+  padding: 10px 12px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.input:focus-visible, 
+.textarea:focus-visible {
+  outline: 3px solid var(--focus-ring);
+}
+
+.gridRow {
+  display: flex;
+  gap: 16px;
+}
+
+.checkboxLabel {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 500;
+}
+
+.checkboxLabel input:focus-visible {
+  outline: 3px solid var(--focus-ring);
+  outline-offset: 2px;
+}
+
+.productFormButtons {
+  display: flex;
+  gap: 16px;
+  margin-top: 8px;
+}
+
+.submitButton {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  background: var(--approve-bg);
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.submitButton:hover { background: var(--approve-hover); }
+
+.cancelButton {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  background: var(--cancel-bg);
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.cancelButton:hover { background: var(--cancel-hover); }
+
+.submitButton:focus-visible,
+.cancelButton:focus-visible {
+  outline: 3px solid var(--focus-ring);
+  outline-offset: 3px;
+}

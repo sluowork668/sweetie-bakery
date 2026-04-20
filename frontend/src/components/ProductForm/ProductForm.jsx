@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import './ProductForm.css';
+import styles from './ProductForm.module.css';
 
 const emptyForm = {
   _id: '',
@@ -10,8 +10,11 @@ const emptyForm = {
   price: '',
   description: '',
   imageUrl: '',
-  available: true,
-  isSample: false,
+  inStock: true,
+  ingredients: '',
+  allergens: '',
+  calories: '',
+  flavorProfile: '',
 };
 
 function ProductForm({ onSubmit, editingProduct, onCancel }) {
@@ -27,8 +30,11 @@ function ProductForm({ onSubmit, editingProduct, onCancel }) {
         price: editingProduct.price ?? '',
         description: editingProduct.description || '',
         imageUrl: editingProduct.imageUrl || '',
-        available: editingProduct.available ?? true,
-        isSample: editingProduct.isSample ?? false,
+        inStock: editingProduct.inStock ?? true,
+        ingredients: editingProduct.ingredients || '',
+        allergens: editingProduct.allergens || '',
+        calories: editingProduct.calories ?? '',
+        flavorProfile: editingProduct.flavorProfile || '',
       });
     } else {
       setFormData(emptyForm);
@@ -49,6 +55,7 @@ function ProductForm({ onSubmit, editingProduct, onCancel }) {
     const productToSubmit = {
       ...formData,
       price: Number(formData.price),
+      calories: Number(formData.calories) || 0,
       createdAt: editingProduct?.createdAt || new Date(),
     };
 
@@ -60,80 +67,45 @@ function ProductForm({ onSubmit, editingProduct, onCancel }) {
   };
 
   return (
-    <form className="product-form" onSubmit={handleSubmit}>
+    <form className={styles.productForm} onSubmit={handleSubmit} aria-label={editingProduct ? 'Edit Product Form' : 'Add Product Form'}>
       <h2>{editingProduct ? 'Edit Product' : 'Add Product'}</h2>
 
-      <input
-        type="text"
-        name="name"
-        placeholder="Product name"
-        value={formData.name}
-        onChange={handleChange}
-        required
-      />
+      <input type="text" name="name" placeholder="Product name" value={formData.name} onChange={handleChange} required className={styles.input} aria-label="Product name" />
 
-      <select name="category" value={formData.category} onChange={handleChange}>
-        <option value="dessert">dessert</option>
-        <option value="pastry">pastry</option>
-        <option value="drink">drink</option>
-        <option value="savory">savory</option>
-        <option value="bread">bread</option>
+      <select name="category" value={formData.category} onChange={handleChange} className={styles.input} aria-label="Category">
+        <option value="dessert">Dessert</option>
+        <option value="pastry">Pastry</option>
+        <option value="drink">Drink</option>
+        <option value="savory">Savory</option>
+        <option value="bread">Bread</option>
       </select>
 
-      <input
-        type="number"
-        step="0.01"
-        name="price"
-        placeholder="Price"
-        value={formData.price}
-        onChange={handleChange}
-        required
-      />
+      <input type="number" step="0.01" name="price" placeholder="Price" value={formData.price} onChange={handleChange} required className={styles.input} aria-label="Price" />
+      <textarea name="description" placeholder="Description" value={formData.description} onChange={handleChange} rows="4" required className={styles.textarea} aria-label="Description" />
+      <input type="text" name="imageUrl" placeholder="Image URL" value={formData.imageUrl} onChange={handleChange} className={styles.input} aria-label="Image URL" />
 
-      <textarea
-        name="description"
-        placeholder="Description"
-        value={formData.description}
-        onChange={handleChange}
-        rows="4"
-        required
-      />
+      <div className={styles.gridRow}>
+        <input type="text" name="ingredients" placeholder="Ingredients" value={formData.ingredients} onChange={handleChange} className={styles.input} aria-label="Ingredients" />
+        <input type="text" name="allergens" placeholder="Allergens" value={formData.allergens} onChange={handleChange} className={styles.input} aria-label="Allergens" />
+      </div>
 
-      <input
-        type="text"
-        name="imageUrl"
-        placeholder="Image URL"
-        value={formData.imageUrl}
-        onChange={handleChange}
-      />
+      <div className={styles.gridRow}>
+        <input type="number" name="calories" placeholder="Calories" value={formData.calories} onChange={handleChange} className={styles.input} aria-label="Calories" />
+        <input type="text" name="flavorProfile" placeholder="Flavor Profile" value={formData.flavorProfile} onChange={handleChange} className={styles.input} aria-label="Flavor Profile" />
+      </div>
 
-      <label>
-        <input
-          type="checkbox"
-          name="available"
-          checked={formData.available}
-          onChange={handleChange}
-        />
-        Available
+      <label className={styles.checkboxLabel}>
+        <input type="checkbox" name="inStock" checked={formData.inStock} onChange={handleChange} />
+        In Stock
       </label>
 
-      <label>
-        <input
-          type="checkbox"
-          name="isSample"
-          checked={formData.isSample}
-          onChange={handleChange}
-        />
-        Is Sample (Synthetic)
-      </label>
-
-      <div className="product-form-buttons">
-        <button type="submit">
+      <div className={styles.productFormButtons}>
+        <button type="submit" className={styles.submitButton}>
           {editingProduct ? 'Update Product' : 'Add Product'}
         </button>
 
         {editingProduct && (
-          <button type="button" onClick={onCancel}>
+          <button type="button" onClick={onCancel} className={styles.cancelButton}>
             Cancel
           </button>
         )}
@@ -153,12 +125,12 @@ ProductForm.propTypes = {
     price: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     description: PropTypes.string,
     imageUrl: PropTypes.string,
-    available: PropTypes.bool,
-    isSample: PropTypes.bool,
-    createdAt: PropTypes.oneOfType([
-      PropTypes.instanceOf(Date),
-      PropTypes.string,
-    ]),
+    inStock: PropTypes.bool,
+    ingredients: PropTypes.string,
+    allergens: PropTypes.string,
+    calories: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    flavorProfile: PropTypes.string,
+    createdAt: PropTypes.oneOfType([PropTypes.instanceOf(Date), PropTypes.string]),
   }),
 };
 

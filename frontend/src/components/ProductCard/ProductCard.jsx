@@ -6,13 +6,12 @@ function ProductCard({ product }) {
   return (
     <Link to={`/products/${product.id}`} className="product-card-link">
       <div className="product-card">
-        {product.imageUrl && (
-          <img
-            src={product.imageUrl}
-            alt={product.name}
-            className="product-card-image"
-          />
-        )}
+        {/* Removed the && condition and added a fallback image path */}
+        <img
+          src={product.imageUrl || '/images/products/default.jpg'}
+          alt={product.name}
+          className="product-card-image"
+        />
 
         <h3>{product.name}</h3>
         <p className="product-category">{product.category}</p>
@@ -32,8 +31,12 @@ ProductCard.propTypes = {
     price: PropTypes.number.isRequired,
     description: PropTypes.string,
     imageUrl: PropTypes.string,
-    available: PropTypes.bool,
-    isSample: PropTypes.bool,
+    // --- Updated to match new Schema ---
+    ingredients: PropTypes.string,
+    allergens: PropTypes.string,
+    calories: PropTypes.number,
+    flavorProfile: PropTypes.string,
+    inStock: PropTypes.bool,
   }).isRequired,
 };
 

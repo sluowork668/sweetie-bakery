@@ -17,20 +17,16 @@ function MenuPage() {
       .catch((err) => console.error('Failed to fetch products:', err));
   }, []);
 
-  const realProducts = useMemo(() => {
-    return products.filter((product) => product.isSample !== true);
+  const categories = useMemo(() => {
+    return [...new Set(products.map((product) => product.category))];
   }, [products]);
 
-  const categories = useMemo(() => {
-    return [...new Set(realProducts.map((product) => product.category))];
-  }, [realProducts]);
-
   const filteredProducts = useMemo(() => {
-    return realProducts.filter((product) => {
+    return products.filter((product) => {
       if (selectedCategory === 'all') return true;
       return product.category === selectedCategory;
     });
-  }, [realProducts, selectedCategory]);
+  }, [products, selectedCategory]);
 
   return (
     <div className="menu-page">

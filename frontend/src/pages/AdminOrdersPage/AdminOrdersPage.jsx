@@ -1,13 +1,12 @@
 import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import './AdminOrdersPage.css';
+import styles from './AdminOrdersPage.module.css';
 
 function AdminOrdersPage() {
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  // Fetch all orders when the component loads
   useEffect(() => {
     fetchOrders();
   }, []);
@@ -25,7 +24,6 @@ function AdminOrdersPage() {
     }
   };
 
-  // Update order status
   const handleStatusChange = async (id, newStatus) => {
     try {
       const response = await fetch(`/api/orders/${id}`, {
@@ -35,29 +33,18 @@ function AdminOrdersPage() {
       });
 
       if (response.ok) {
-        // Update local state so the UI reflects the change immediately
-        setOrders(
-          orders.map((order) =>
-            order._id === id ? { ...order, status: newStatus } : order
-          )
-        );
+        setOrders(orders.map((order) => order._id === id ? { ...order, status: newStatus } : order));
       }
     } catch (err) {
       console.error('Error updating status:', err);
     }
   };
 
-  // Delete an order
   const handleDelete = async (id) => {
     if (!window.confirm('Are you sure you want to delete this order?')) return;
-
     try {
-      const response = await fetch(`/api/orders/${id}`, {
-        method: 'DELETE',
-      });
-
+      const response = await fetch(`/api/orders/${id}`, { method: 'DELETE' });
       if (response.ok) {
-        // Remove the deleted order from local state
         setOrders(orders.filter((order) => order._id !== id));
       }
     } catch (err) {
@@ -69,38 +56,49 @@ function AdminOrdersPage() {
   if (error) return <div>Error: {error}</div>;
 
   return (
-    <div className="admin-orders-container">
+    <main className={styles.adminOrdersContainer}>
       <h2>Order Management Dashboard</h2>
       {orders.length === 0 ? (
         <p>No orders found.</p>
       ) : (
-        <table className="orders-table">
+        <table className={styles.ordersTable}>
           <thead>
             <tr>
-              <th>Date</th>
-              <th>Customer</th>
-              <th>Order Details</th>
-              <th>Status</th>
-              <th>Actions</th>
+              <th scope="col">Time Placed</th>
+              <th scope="col">Customer</th>
+              <th scope="col">Order Details</th>
+              <th scope="col">Total</th>
+              <th scope="col">Status</th>
+              <th scope="col">Actions</th>
             </tr>
           </thead>
           <tbody>
             {orders.map((order) => (
               <tr key={order._id}>
-                <td>{new Date(order.createdAt).toLocaleDateString()}</td>
+                <td>{new Date(order.createdAt).toLocaleString()}</td>
                 <td>
-                  <strong>{order.customerName}</strong>
+                  <strong>{order.customerName || 'Guest'}</strong>
                   <br />
-                  <small>{order.email}</small>
+                  <small>{order.customerEmail || order.email}</small>
                 </td>
-                <td>{order.orderDetails}</td>
+                <td>
+                  {order.items && order.items.length > 0 ? (
+                    <ul style={{ paddingLeft: '20px', margin: 0 }}>
+                      {order.items.map((item, idx) => (
+                        <li key={idx}>{item.qty}x {item.name}</li>
+                      ))}
+                    </ul>
+                  ) : (
+                    <span>{order.orderDetails}</span>
+                  )}
+                </td>
+                <td>${order.totalPrice ? order.totalPrice.toFixed(2) : '0.00'}</td>
                 <td>
                   <select
                     value={order.status || 'pending'}
-                    onChange={(e) =>
-                      handleStatusChange(order._id, e.target.value)
-                    }
-                    className={`status-select ${order.status || 'pending'}`}
+                    onChange={(e) => handleStatusChange(order._id, e.target.value)}
+                    className={`${styles.statusSelect} ${styles[order.status === 'in-progress' ? 'inProgress' : order.status || 'pending']}`}
+                    aria-label={`Update status for order by ${order.customerName || 'Guest'}`}
                   >
                     <option value="pending">Pending</option>
                     <option value="in-progress">In Progress</option>
@@ -109,9 +107,10 @@ function AdminOrdersPage() {
                   </select>
                 </td>
                 <td>
-                  <button
-                    onClick={() => handleDelete(order._id)}
-                    className="delete-btn"
+                  <button 
+                    onClick={() => handleDelete(order._id)} 
+                    className={styles.deleteBtn}
+                    aria-label={`Delete order for ${order.customerName || 'Guest'}`}
                   >
                     Delete
                   </button>
@@ -121,7 +120,7 @@ function AdminOrdersPage() {
           </tbody>
         </table>
       )}
-    </div>
+    </main>
   );
 }
 
