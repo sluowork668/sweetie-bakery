@@ -9,7 +9,8 @@
   margin-bottom: 32px;
 }
 
-.input, .textarea {
+.input,
+.textarea {
   padding: 10px 12px;
   border: 1px solid #ccc;
   border-radius: 8px;
@@ -19,7 +20,7 @@
 }
 
 .input:focus,
-.input:focus-visible, 
+.input:focus-visible,
 .textarea:focus,
 .textarea:focus-visible {
   outline: 3px solid var(--focus-ring);
@@ -59,7 +60,9 @@
   cursor: pointer;
 }
 
-.submitButton:hover { background: var(--approve-hover); }
+.submitButton:hover {
+  background: var(--approve-hover);
+}
 
 .cancelButton {
   padding: 10px 20px;
@@ -71,7 +74,9 @@
   cursor: pointer;
 }
 
-.cancelButton:hover { background: var(--cancel-hover); }
+.cancelButton:hover {
+  background: var(--cancel-hover);
+}
 
 .submitButton:focus,
 .submitButton:focus-visible,

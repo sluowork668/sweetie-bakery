@@ -31,7 +31,12 @@ function ProductForm({ onSubmit, editingProduct, onCancel }) {
         description: editingProduct.description || '',
         imageUrl: editingProduct.imageUrl || '',
         // FIX: Checks for new 'inStock' field, falls back to legacy 'available' field, defaults to true
-        inStock: editingProduct.inStock !== undefined ? editingProduct.inStock : (editingProduct.available !== undefined ? editingProduct.available : true),
+        inStock:
+          editingProduct.inStock !== undefined
+            ? editingProduct.inStock
+            : editingProduct.available !== undefined
+              ? editingProduct.available
+              : true,
         ingredients: editingProduct.ingredients || '',
         allergens: editingProduct.allergens || '',
         calories: editingProduct.calories ?? '',
@@ -81,12 +86,31 @@ function ProductForm({ onSubmit, editingProduct, onCancel }) {
   };
 
   return (
-    <form className={styles.productForm} onSubmit={handleSubmit} aria-label={editingProduct ? 'Edit Product Form' : 'Add Product Form'}>
+    <form
+      className={styles.productForm}
+      onSubmit={handleSubmit}
+      aria-label={editingProduct ? 'Edit Product Form' : 'Add Product Form'}
+    >
       <h2>{editingProduct ? 'Edit Product' : 'Add Product'}</h2>
 
-      <input type="text" name="name" placeholder="Product name" value={formData.name} onChange={handleChange} required className={styles.input} aria-label="Product name" />
+      <input
+        type="text"
+        name="name"
+        placeholder="Product name"
+        value={formData.name}
+        onChange={handleChange}
+        required
+        className={styles.input}
+        aria-label="Product name"
+      />
 
-      <select name="category" value={formData.category} onChange={handleChange} className={styles.input} aria-label="Category">
+      <select
+        name="category"
+        value={formData.category}
+        onChange={handleChange}
+        className={styles.input}
+        aria-label="Category"
+      >
         <option value="dessert">Dessert</option>
         <option value="pastry">Pastry</option>
         <option value="drink">Drink</option>
@@ -94,41 +118,98 @@ function ProductForm({ onSubmit, editingProduct, onCancel }) {
         <option value="bread">Bread</option>
       </select>
 
-      <input type="number" step="0.01" name="price" placeholder="Price" value={formData.price} onChange={handleChange} required className={styles.input} aria-label="Price" />
-      <textarea name="description" placeholder="Description" value={formData.description} onChange={handleChange} rows="4" required className={styles.textarea} aria-label="Description" />
-      
+      <input
+        type="number"
+        step="0.01"
+        name="price"
+        placeholder="Price"
+        value={formData.price}
+        onChange={handleChange}
+        required
+        className={styles.input}
+        aria-label="Price"
+      />
+      <textarea
+        name="description"
+        placeholder="Description"
+        value={formData.description}
+        onChange={handleChange}
+        rows="4"
+        required
+        className={styles.textarea}
+        aria-label="Description"
+      />
+
       {/* NEW: Device File Upload Section */}
       <div className={styles.gridRow} style={{ alignItems: 'center' }}>
-        <input 
-          type="text" 
-          name="imageUrl" 
-          placeholder="Image URL or Upload File ->" 
-          value={formData.imageUrl} 
-          onChange={handleChange} 
-          className={styles.input} 
-          aria-label="Image URL" 
+        <input
+          type="text"
+          name="imageUrl"
+          placeholder="Image URL or Upload File ->"
+          value={formData.imageUrl}
+          onChange={handleChange}
+          className={styles.input}
+          aria-label="Image URL"
         />
-        <input 
-          type="file" 
-          accept="image/*" 
-          onChange={handleImageUpload} 
+        <input
+          type="file"
+          accept="image/*"
+          onChange={handleImageUpload}
           style={{ width: '100%', fontSize: '0.9rem' }}
           aria-label="Upload image from device"
         />
       </div>
 
       <div className={styles.gridRow}>
-        <input type="text" name="ingredients" placeholder="Ingredients" value={formData.ingredients} onChange={handleChange} className={styles.input} aria-label="Ingredients" />
-        <input type="text" name="allergens" placeholder="Allergens" value={formData.allergens} onChange={handleChange} className={styles.input} aria-label="Allergens" />
+        <input
+          type="text"
+          name="ingredients"
+          placeholder="Ingredients"
+          value={formData.ingredients}
+          onChange={handleChange}
+          className={styles.input}
+          aria-label="Ingredients"
+        />
+        <input
+          type="text"
+          name="allergens"
+          placeholder="Allergens"
+          value={formData.allergens}
+          onChange={handleChange}
+          className={styles.input}
+          aria-label="Allergens"
+        />
       </div>
 
       <div className={styles.gridRow}>
-        <input type="number" name="calories" placeholder="Calories" value={formData.calories} onChange={handleChange} className={styles.input} aria-label="Calories" />
-        <input type="text" name="flavorProfile" placeholder="Flavor Profile" value={formData.flavorProfile} onChange={handleChange} className={styles.input} aria-label="Flavor Profile" />
+        <input
+          type="number"
+          name="calories"
+          placeholder="Calories"
+          value={formData.calories}
+          onChange={handleChange}
+          className={styles.input}
+          aria-label="Calories"
+        />
+        <input
+          type="text"
+          name="flavorProfile"
+          placeholder="Flavor Profile"
+          value={formData.flavorProfile}
+          onChange={handleChange}
+          className={styles.input}
+          aria-label="Flavor Profile"
+        />
       </div>
 
       <label className={styles.checkboxLabel}>
-        <input type="checkbox" name="inStock" checked={formData.inStock} onChange={handleChange} aria-label="In Stock Status" />
+        <input
+          type="checkbox"
+          name="inStock"
+          checked={formData.inStock}
+          onChange={handleChange}
+          aria-label="In Stock Status"
+        />
         In Stock
       </label>
 
@@ -138,7 +219,12 @@ function ProductForm({ onSubmit, editingProduct, onCancel }) {
         </button>
 
         {editingProduct && (
-          <button tabIndex="0" type="button" onClick={onCancel} className={styles.cancelButton}>
+          <button
+            tabIndex="0"
+            type="button"
+            onClick={onCancel}
+            className={styles.cancelButton}
+          >
             Cancel
           </button>
         )}
@@ -164,7 +250,10 @@ ProductForm.propTypes = {
     allergens: PropTypes.string,
     calories: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     flavorProfile: PropTypes.string,
-    createdAt: PropTypes.oneOfType([PropTypes.instanceOf(Date), PropTypes.string]),
+    createdAt: PropTypes.oneOfType([
+      PropTypes.instanceOf(Date),
+      PropTypes.string,
+    ]),
   }),
 };
 

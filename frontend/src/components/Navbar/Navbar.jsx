@@ -1,13 +1,13 @@
-import { NavLink, useNavigate } from "react-router-dom";
-import PropTypes from "prop-types";
-import styles from "./Navbar.module.css";
+import { NavLink, useNavigate } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import styles from './Navbar.module.css';
 
 function Navbar({ user, setUser }) {
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    setUser(null); 
-    navigate("/");  
+    setUser(null);
+    navigate('/');
   };
 
   // Helper function to handle React Router's active state with CSS Modules
@@ -17,11 +17,10 @@ function Navbar({ user, setUser }) {
 
   return (
     <nav className={styles.navbar} aria-label="Main Navigation">
-      
-      <NavLink 
-        to="/" 
-        end 
-        className={styles.navbarBrand} 
+      <NavLink
+        to="/"
+        end
+        className={styles.navbarBrand}
         tabIndex="0"
         aria-label="Sweetie Bakery Home"
       >
@@ -29,16 +28,24 @@ function Navbar({ user, setUser }) {
       </NavLink>
 
       <div className={styles.navbarLinks}>
-        <NavLink to="/menu" className={getLinkStyle} tabIndex="0">Menu</NavLink>
-        <NavLink to="/order" className={getLinkStyle} tabIndex="0">Order</NavLink>
+        <NavLink to="/menu" className={getLinkStyle} tabIndex="0">
+          Menu
+        </NavLink>
+        <NavLink to="/order" className={getLinkStyle} tabIndex="0">
+          Order
+        </NavLink>
 
         {user ? (
           <>
-            <NavLink to="/admin/products" className={getLinkStyle} tabIndex="0">Admin - Menu</NavLink>
-            <NavLink to="/admin/orders" className={getLinkStyle} tabIndex="0">Admin - Orders</NavLink>
-            <button 
-              onClick={handleLogout} 
-              className={styles.logoutLink} 
+            <NavLink to="/admin/products" className={getLinkStyle} tabIndex="0">
+              Admin - Menu
+            </NavLink>
+            <NavLink to="/admin/orders" className={getLinkStyle} tabIndex="0">
+              Admin - Orders
+            </NavLink>
+            <button
+              onClick={handleLogout}
+              className={styles.logoutLink}
               tabIndex="0"
               aria-label="Log out of staff portal"
             >
@@ -46,7 +53,9 @@ function Navbar({ user, setUser }) {
             </button>
           </>
         ) : (
-          <NavLink to="/login" className={getLinkStyle} tabIndex="0">Staff Login</NavLink>
+          <NavLink to="/login" className={getLinkStyle} tabIndex="0">
+            Staff Login
+          </NavLink>
         )}
       </div>
     </nav>

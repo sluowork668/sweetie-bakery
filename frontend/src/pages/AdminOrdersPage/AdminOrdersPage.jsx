@@ -33,7 +33,11 @@ function AdminOrdersPage() {
       });
 
       if (response.ok) {
-        setOrders(orders.map((order) => order._id === id ? { ...order, status: newStatus } : order));
+        setOrders(
+          orders.map((order) =>
+            order._id === id ? { ...order, status: newStatus } : order
+          )
+        );
       }
     } catch (err) {
       console.error('Error updating status:', err);
@@ -85,18 +89,24 @@ function AdminOrdersPage() {
                   {order.items && order.items.length > 0 ? (
                     <ul style={{ paddingLeft: '20px', margin: 0 }}>
                       {order.items.map((item, idx) => (
-                        <li key={idx}>{item.qty}x {item.name}</li>
+                        <li key={idx}>
+                          {item.qty}x {item.name}
+                        </li>
                       ))}
                     </ul>
                   ) : (
                     <span>{order.orderDetails}</span>
                   )}
                 </td>
-                <td>${order.totalPrice ? order.totalPrice.toFixed(2) : '0.00'}</td>
+                <td>
+                  ${order.totalPrice ? order.totalPrice.toFixed(2) : '0.00'}
+                </td>
                 <td>
                   <select
                     value={order.status || 'pending'}
-                    onChange={(e) => handleStatusChange(order._id, e.target.value)}
+                    onChange={(e) =>
+                      handleStatusChange(order._id, e.target.value)
+                    }
                     className={`${styles.statusSelect} ${styles[order.status === 'in-progress' ? 'inProgress' : order.status || 'pending']}`}
                     aria-label={`Update status for order by ${order.customerName || 'Guest'}`}
                   >
@@ -107,9 +117,9 @@ function AdminOrdersPage() {
                   </select>
                 </td>
                 <td>
-                  <button 
+                  <button
                     tabIndex="0" /* FORCES OS TO TAB HERE */
-                    onClick={() => handleDelete(order._id)} 
+                    onClick={() => handleDelete(order._id)}
                     className={styles.deleteBtn}
                     aria-label={`Delete order for ${order.customerName || 'Guest'}`}
                   >

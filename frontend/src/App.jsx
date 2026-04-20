@@ -22,9 +22,9 @@ function App() {
         <Route path="/menu" element={<MenuPage />} />
         <Route path="/order" element={<OrderPage />} />
         <Route path="/products/:id" element={<ProductDetailPage />} />
-        
+
         <Route path="/login" element={<LoginPage setUser={setUser} />} />
-        
+
         <Route path="/admin/orders" element={<AdminOrdersPage />} />
         <Route path="/admin/products" element={<AdminProductsPage />} />
       </Routes>

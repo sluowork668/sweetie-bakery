@@ -10,7 +10,6 @@
   z-index: 20;
 }
 
-/* Updated to look like a brand but act like a link */
 .navbarBrand {
   font-size: 1.6rem;
   font-weight: 800;
@@ -36,7 +35,8 @@
   align-items: center;
 }
 
-.navbarLinks a,
+/* Base style for all links */
+.navLink,
 .logoutLink {
   text-decoration: none;
   color: #4a3527;
@@ -50,12 +50,21 @@
   border-radius: 4px;
 }
 
-.navbarLinks a:hover,
+.navLink:hover,
 .logoutLink:hover {
   color: #c46027;
 }
 
-.navbarLinks a:focus-visible,
+/* The Active State Underline */
+.activeLink {
+  color: #bc5920;
+  text-decoration: underline;
+  text-decoration-color: #bc5920;
+  text-decoration-thickness: 3px;
+  text-underline-offset: 6px;
+}
+
+.navLink:focus-visible,
 .logoutLink:focus-visible {
   outline: 3px solid var(--focus-ring);
   outline-offset: 4px;

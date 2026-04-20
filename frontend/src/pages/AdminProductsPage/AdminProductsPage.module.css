@@ -33,7 +33,10 @@
   outline: 3px solid var(--focus-ring);
 }
 
-.adminFilters input { flex: 1; min-width: 240px; }
+.adminFilters input {
+  flex: 1;
+  min-width: 240px;
+}
 
 .adminResultsCount {
   margin-bottom: 16px;
@@ -57,15 +60,15 @@
   background: white;
 }
 
-.adminProductInfo { 
-  flex: 1; 
+.adminProductInfo {
+  flex: 1;
   display: flex;
   flex-direction: column;
   gap: 6px;
 }
 
-.adminProductInfo h3 { 
-  margin: 0; 
+.adminProductInfo h3 {
+  margin: 0;
   color: var(--text-dark);
 }
 
@@ -88,8 +91,12 @@
 .stockStatus {
   font-weight: bold;
 }
-.inStock { color: #155724; }
-.outOfStock { color: #721c24; }
+.inStock {
+  color: #155724;
+}
+.outOfStock {
+  color: #721c24;
+}
 
 .adminProductActions {
   display: flex;
@@ -106,7 +113,9 @@
   cursor: pointer;
 }
 
-.editBtn:hover { background: var(--approve-hover); }
+.editBtn:hover {
+  background: var(--approve-hover);
+}
 
 .deleteBtn {
   padding: 8px 14px;
@@ -117,7 +126,9 @@
   cursor: pointer;
 }
 
-.deleteBtn:hover { background: var(--cancel-hover); }
+.deleteBtn:hover {
+  background: var(--cancel-hover);
+}
 
 .editBtn:focus-visible,
 .deleteBtn:focus-visible {

@@ -31,10 +31,22 @@
   cursor: pointer;
 }
 
-.pending { background-color: #fff3cd; color: #856404; }
-.inProgress { background-color: #cce5ff; color: #004085; }
-.completed { background-color: #d4edda; color: #155724; }
-.cancelled { background-color: #f8d7da; color: #721c24; }
+.pending {
+  background-color: #fff3cd;
+  color: #856404;
+}
+.inProgress {
+  background-color: #cce5ff;
+  color: #004085;
+}
+.completed {
+  background-color: #d4edda;
+  color: #155724;
+}
+.cancelled {
+  background-color: #f8d7da;
+  color: #721c24;
+}
 
 .statusSelect:focus,
 .statusSelect:focus-visible {
@@ -43,7 +55,7 @@
 }
 
 .deleteBtn {
-  background-color: var(--cancel-bg); 
+  background-color: var(--cancel-bg);
   color: white;
   border: none;
   padding: 0.5rem 1rem;

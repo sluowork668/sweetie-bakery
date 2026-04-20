@@ -24,13 +24,13 @@ export default defineConfig([
     },
     rules: {
       'no-unused-vars': ['error', { varsIgnorePattern: '^[A-Z_]' }],
-      "react/jsx-no-target-blank": "off"
+      'react/jsx-no-target-blank': 'off',
     },
   },
   {
     files: ['**/*.{js,jsx}'],
     rules: {
-      "react-hooks/set-state-in-effect": "off"
-    }
-  }
+      'react-hooks/set-state-in-effect': 'off',
+    },
+  },
 ]);

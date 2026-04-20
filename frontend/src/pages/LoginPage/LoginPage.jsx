@@ -22,10 +22,10 @@ function LoginPage({ setUser }) {
 
       if (response.ok) {
         const data = await response.json();
-        setUser({ username: data.username }); 
-        navigate("/admin/orders");
+        setUser({ username: data.username });
+        navigate('/admin/orders');
       } else {
-        setError("Invalid credentials");
+        setError('Invalid credentials');
       }
     } catch (err) {
       console.error('Login error:', err);
@@ -36,13 +36,17 @@ function LoginPage({ setUser }) {
   return (
     <main className={styles.loginContainer}>
       <h2>Staff Login</h2>
-      
+
       {/* aria-live ensures screen readers announce errors immediately without needing to tab to them */}
       <div aria-live="polite">
         {error && <p className={styles.errorMessage}>{error}</p>}
       </div>
 
-      <form onSubmit={handleLogin} className={styles.loginForm} aria-label="Staff Login Form">
+      <form
+        onSubmit={handleLogin}
+        className={styles.loginForm}
+        aria-label="Staff Login Form"
+      >
         <input
           type="text"
           placeholder="Username"
@@ -61,8 +65,8 @@ function LoginPage({ setUser }) {
           className={styles.input}
           aria-label="Password"
         />
-        <button 
-          type="submit" 
+        <button
+          type="submit"
           className={styles.loginBtn}
           tabIndex="0" /* Forces Mac Safari tab stop */
         >

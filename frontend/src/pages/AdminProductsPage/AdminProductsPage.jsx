@@ -60,10 +60,13 @@ function AdminProductsPage() {
 
   const handleDeleteProduct = async (product) => {
     if (!product._id) return alert('Error: missing _id.');
-    if (!window.confirm(`Are you sure you want to delete "${product.name}"?`)) return;
+    if (!window.confirm(`Are you sure you want to delete "${product.name}"?`))
+      return;
 
     try {
-      const res = await fetch(`${API_BASE_URL}/${product._id}`, { method: 'DELETE' });
+      const res = await fetch(`${API_BASE_URL}/${product._id}`, {
+        method: 'DELETE',
+      });
       if (!res.ok) throw new Error('Failed to delete product');
       setProducts((prev) => prev.filter((p) => p._id !== product._id));
     } catch (err) {
@@ -87,8 +90,11 @@ function AdminProductsPage() {
 
   const filteredProducts = useMemo(() => {
     return products.filter((product) => {
-      const matchesSearch = (product.name || '').toLowerCase().includes(searchTerm.toLowerCase());
-      const matchesCategory = selectedCategory === 'all' || product.category === selectedCategory;
+      const matchesSearch = (product.name || '')
+        .toLowerCase()
+        .includes(searchTerm.toLowerCase());
+      const matchesCategory =
+        selectedCategory === 'all' || product.category === selectedCategory;
       return matchesSearch && matchesCategory;
     });
   }, [products, searchTerm, selectedCategory]);
@@ -111,14 +117,16 @@ function AdminProductsPage() {
           onChange={(e) => setSearchTerm(e.target.value)}
           aria-label="Search products"
         />
-        <select 
-          value={selectedCategory} 
+        <select
+          value={selectedCategory}
           onChange={(e) => setSelectedCategory(e.target.value)}
           aria-label="Select product category"
         >
           <option value="all">All categories</option>
           {categories.map((cat) => (
-            <option key={cat} value={cat}>{cat}</option>
+            <option key={cat} value={cat}>
+              {cat}
+            </option>
           ))}
         </select>
       </section>
@@ -132,13 +140,31 @@ function AdminProductsPage() {
           <article key={product._id} className={styles.adminProductCard}>
             <div>
               {product.imageUrl ? (
-                <img 
-                  src={product.imageUrl} 
-                  alt={product.name} 
-                  style={{ width: '100px', height: '100px', objectFit: 'cover', borderRadius: '8px' }} 
+                <img
+                  src={product.imageUrl}
+                  alt={product.name}
+                  style={{
+                    width: '100px',
+                    height: '100px',
+                    objectFit: 'cover',
+                    borderRadius: '8px',
+                  }}
                 />
               ) : (
-                <div style={{ width: '100px', height: '100px', backgroundColor: '#eee', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '12px', color: '#999', borderRadius: '8px' }} aria-hidden="true">
+                <div
+                  style={{
+                    width: '100px',
+                    height: '100px',
+                    backgroundColor: '#eee',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    fontSize: '12px',
+                    color: '#999',
+                    borderRadius: '8px',
+                  }}
+                  aria-hidden="true"
+                >
                   No Image
                 </div>
               )}
@@ -146,38 +172,53 @@ function AdminProductsPage() {
 
             <div className={styles.adminProductInfo}>
               <h3>{product.name}</h3>
-              
+
               <div className={styles.productMeta}>
-                <span className={styles.badge}>${Number(product.price).toFixed(2)}</span>
-                <span className={styles.badge} style={{ textTransform: 'capitalize' }}>{product.category}</span>
-                <span className={`${styles.badge} ${styles.stockStatus} ${product.inStock ? styles.inStock : styles.outOfStock}`}>
+                <span className={styles.badge}>
+                  ${Number(product.price).toFixed(2)}
+                </span>
+                <span
+                  className={styles.badge}
+                  style={{ textTransform: 'capitalize' }}
+                >
+                  {product.category}
+                </span>
+                <span
+                  className={`${styles.badge} ${styles.stockStatus} ${product.inStock ? styles.inStock : styles.outOfStock}`}
+                >
                   {product.inStock ? 'In Stock' : 'Out of Stock'}
                 </span>
-                {product.calories > 0 && <span className={styles.badge}>{product.calories} Cal</span>}
+                {product.calories > 0 && (
+                  <span className={styles.badge}>{product.calories} Cal</span>
+                )}
               </div>
 
               <div className={styles.productMeta} style={{ marginTop: '4px' }}>
                 {product.ingredients && (
-                  <div><strong>Ingredients:</strong> {product.ingredients}</div>
+                  <div>
+                    <strong>Ingredients:</strong> {product.ingredients}
+                  </div>
                 )}
                 {product.allergens && (
-                  <div style={{ color: '#856404' }}><strong>Allergens:</strong> {product.allergens}</div>
+                  <div style={{ color: '#856404' }}>
+                    <strong>Allergens:</strong> {product.allergens}
+                  </div>
                 )}
               </div>
             </div>
 
             <div className={styles.adminProductActions}>
-              <button 
+              <button
                 tabIndex="0"
-                className={styles.editBtn} 
+                className={styles.editBtn}
                 onClick={() => handleEditClick(product)}
                 aria-label={`Edit ${product.name}`}
               >
                 Edit
               </button>
-              <button 
+              <button
                 tabIndex="0"
-                className={styles.deleteBtn} 
+                className={styles.deleteBtn}
                 onClick={() => handleDeleteProduct(product)}
                 aria-label={`Delete ${product.name}`}
               >

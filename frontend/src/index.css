@@ -25,10 +25,9 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
+  --bg-warm: #fdfbf7;
+  --text-dark: #3e2723;
 
-  --bg-warm: #FDFBF7; 
-  --text-dark: #3E2723; 
-  
   /* Global Approval & Cancel Colors */
   --approve-bg: #28a745;
   --approve-hover: #218838;
