@@ -135,10 +135,10 @@ function AdminProductsPage() {
                 <img 
                   src={product.imageUrl} 
                   alt={product.name} 
-                  style={{ width: '60px', height: '60px', objectFit: 'cover', borderRadius: '4px' }} 
+                  style={{ width: '100px', height: '100px', objectFit: 'cover', borderRadius: '8px' }} 
                 />
               ) : (
-                <div style={{ width: '60px', height: '60px', backgroundColor: '#eee', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '10px', color: '#999' }} aria-hidden="true">
+                <div style={{ width: '100px', height: '100px', backgroundColor: '#eee', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '12px', color: '#999', borderRadius: '8px' }} aria-hidden="true">
                   No Image
                 </div>
               )}
@@ -146,12 +146,29 @@ function AdminProductsPage() {
 
             <div className={styles.adminProductInfo}>
               <h3>{product.name}</h3>
-              <p>${Number(product.price).toFixed(2)}</p>
-              <p>{product.category}</p>
+              
+              <div className={styles.productMeta}>
+                <span className={styles.badge}>${Number(product.price).toFixed(2)}</span>
+                <span className={styles.badge} style={{ textTransform: 'capitalize' }}>{product.category}</span>
+                <span className={`${styles.badge} ${styles.stockStatus} ${product.inStock ? styles.inStock : styles.outOfStock}`}>
+                  {product.inStock ? 'In Stock' : 'Out of Stock'}
+                </span>
+                {product.calories > 0 && <span className={styles.badge}>{product.calories} Cal</span>}
+              </div>
+
+              <div className={styles.productMeta} style={{ marginTop: '4px' }}>
+                {product.ingredients && (
+                  <div><strong>Ingredients:</strong> {product.ingredients}</div>
+                )}
+                {product.allergens && (
+                  <div style={{ color: '#856404' }}><strong>Allergens:</strong> {product.allergens}</div>
+                )}
+              </div>
             </div>
 
             <div className={styles.adminProductActions}>
               <button 
+                tabIndex="0"
                 className={styles.editBtn} 
                 onClick={() => handleEditClick(product)}
                 aria-label={`Edit ${product.name}`}
@@ -159,6 +176,7 @@ function AdminProductsPage() {
                 Edit
               </button>
               <button 
+                tabIndex="0"
                 className={styles.deleteBtn} 
                 onClick={() => handleDeleteProduct(product)}
                 aria-label={`Delete ${product.name}`}

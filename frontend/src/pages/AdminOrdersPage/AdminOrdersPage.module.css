@@ -36,6 +36,7 @@
 .completed { background-color: #d4edda; color: #155724; }
 .cancelled { background-color: #f8d7da; color: #721c24; }
 
+.statusSelect:focus,
 .statusSelect:focus-visible {
   outline: 3px solid var(--focus-ring);
   outline-offset: 2px;
@@ -54,6 +55,8 @@
   background-color: var(--cancel-hover);
 }
 
+/* Bulletproof Focus Ring */
+.deleteBtn:focus,
 .deleteBtn:focus-visible {
   outline: 3px solid var(--focus-ring);
   outline-offset: 3px;

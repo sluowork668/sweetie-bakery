@@ -30,7 +30,8 @@ function ProductForm({ onSubmit, editingProduct, onCancel }) {
         price: editingProduct.price ?? '',
         description: editingProduct.description || '',
         imageUrl: editingProduct.imageUrl || '',
-        inStock: editingProduct.inStock ?? true,
+        // FIX: Checks for new 'inStock' field, falls back to legacy 'available' field, defaults to true
+        inStock: editingProduct.inStock !== undefined ? editingProduct.inStock : (editingProduct.available !== undefined ? editingProduct.available : true),
         ingredients: editingProduct.ingredients || '',
         allergens: editingProduct.allergens || '',
         calories: editingProduct.calories ?? '',
@@ -47,6 +48,19 @@ function ProductForm({ onSubmit, editingProduct, onCancel }) {
       ...prev,
       [name]: type === 'checkbox' ? checked : value,
     }));
+  };
+
+  // NEW: Handles file upload from device and converts to Base64 String
+  const handleImageUpload = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        // Sets the image URL text box to the new Base64 string
+        setFormData((prev) => ({ ...prev, imageUrl: reader.result }));
+      };
+      reader.readAsDataURL(file); // Converts image to string
+    }
   };
 
   const handleSubmit = (e) => {
@@ -82,7 +96,26 @@ function ProductForm({ onSubmit, editingProduct, onCancel }) {
 
       <input type="number" step="0.01" name="price" placeholder="Price" value={formData.price} onChange={handleChange} required className={styles.input} aria-label="Price" />
       <textarea name="description" placeholder="Description" value={formData.description} onChange={handleChange} rows="4" required className={styles.textarea} aria-label="Description" />
-      <input type="text" name="imageUrl" placeholder="Image URL" value={formData.imageUrl} onChange={handleChange} className={styles.input} aria-label="Image URL" />
+      
+      {/* NEW: Device File Upload Section */}
+      <div className={styles.gridRow} style={{ alignItems: 'center' }}>
+        <input 
+          type="text" 
+          name="imageUrl" 
+          placeholder="Image URL or Upload File ->" 
+          value={formData.imageUrl} 
+          onChange={handleChange} 
+          className={styles.input} 
+          aria-label="Image URL" 
+        />
+        <input 
+          type="file" 
+          accept="image/*" 
+          onChange={handleImageUpload} 
+          style={{ width: '100%', fontSize: '0.9rem' }}
+          aria-label="Upload image from device"
+        />
+      </div>
 
       <div className={styles.gridRow}>
         <input type="text" name="ingredients" placeholder="Ingredients" value={formData.ingredients} onChange={handleChange} className={styles.input} aria-label="Ingredients" />
@@ -95,17 +128,17 @@ function ProductForm({ onSubmit, editingProduct, onCancel }) {
       </div>
 
       <label className={styles.checkboxLabel}>
-        <input type="checkbox" name="inStock" checked={formData.inStock} onChange={handleChange} />
+        <input type="checkbox" name="inStock" checked={formData.inStock} onChange={handleChange} aria-label="In Stock Status" />
         In Stock
       </label>
 
       <div className={styles.productFormButtons}>
-        <button type="submit" className={styles.submitButton}>
+        <button tabIndex="0" type="submit" className={styles.submitButton}>
           {editingProduct ? 'Update Product' : 'Add Product'}
         </button>
 
         {editingProduct && (
-          <button type="button" onClick={onCancel} className={styles.cancelButton}>
+          <button tabIndex="0" type="button" onClick={onCancel} className={styles.cancelButton}>
             Cancel
           </button>
         )}
@@ -126,6 +159,7 @@ ProductForm.propTypes = {
     description: PropTypes.string,
     imageUrl: PropTypes.string,
     inStock: PropTypes.bool,
+    available: PropTypes.bool, // Added to proptypes to prevent warnings on legacy data
     ingredients: PropTypes.string,
     allergens: PropTypes.string,
     calories: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),

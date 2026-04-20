@@ -18,7 +18,9 @@
   box-sizing: border-box;
 }
 
+.input:focus,
 .input:focus-visible, 
+.textarea:focus,
 .textarea:focus-visible {
   outline: 3px solid var(--focus-ring);
 }
@@ -35,6 +37,7 @@
   font-weight: 500;
 }
 
+.checkboxLabel input:focus,
 .checkboxLabel input:focus-visible {
   outline: 3px solid var(--focus-ring);
   outline-offset: 2px;
@@ -70,7 +73,9 @@
 
 .cancelButton:hover { background: var(--cancel-hover); }
 
+.submitButton:focus,
 .submitButton:focus-visible,
+.cancelButton:focus,
 .cancelButton:focus-visible {
   outline: 3px solid var(--focus-ring);
   outline-offset: 3px;

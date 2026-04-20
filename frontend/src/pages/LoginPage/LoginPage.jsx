@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import './LoginPage.css';
+import styles from './LoginPage.module.css';
 
 function LoginPage({ setUser }) {
   const [username, setUsername] = useState('');
@@ -22,7 +22,7 @@ function LoginPage({ setUser }) {
 
       if (response.ok) {
         const data = await response.json();
-        setUser({ username: data.username }); // Update the global user state
+        setUser({ username: data.username }); 
         navigate("/admin/orders");
       } else {
         setError("Invalid credentials");
@@ -34,16 +34,23 @@ function LoginPage({ setUser }) {
   };
 
   return (
-    <div className="login-container">
+    <main className={styles.loginContainer}>
       <h2>Staff Login</h2>
-      {error && <p className="error-message">{error}</p>}
-      <form onSubmit={handleLogin} className="login-form">
+      
+      {/* aria-live ensures screen readers announce errors immediately without needing to tab to them */}
+      <div aria-live="polite">
+        {error && <p className={styles.errorMessage}>{error}</p>}
+      </div>
+
+      <form onSubmit={handleLogin} className={styles.loginForm} aria-label="Staff Login Form">
         <input
           type="text"
           placeholder="Username"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
           required
+          className={styles.input}
+          aria-label="Username"
         />
         <input
           type="password"
@@ -51,13 +58,23 @@ function LoginPage({ setUser }) {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           required
+          className={styles.input}
+          aria-label="Password"
         />
-        <button type="submit" className="login-btn">Login</button>
+        <button 
+          type="submit" 
+          className={styles.loginBtn}
+          tabIndex="0" /* Forces Mac Safari tab stop */
+        >
+          Login
+        </button>
       </form>
-    </div>
+    </main>
   );
 }
 
-LoginPage.propTypes = {};
+LoginPage.propTypes = {
+  setUser: PropTypes.func.isRequired,
+};
 
 export default LoginPage;

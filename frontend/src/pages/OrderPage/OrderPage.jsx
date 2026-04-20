@@ -94,7 +94,6 @@ function OrderPage() {
   );
 }
 
-// Rubric requirement: Define PropTypes for every React component
 OrderPage.propTypes = {};
 
 export default OrderPage;

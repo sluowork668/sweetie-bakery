@@ -1,0 +1,62 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 32px;
+  border-bottom: 1px solid #e9dfd2;
+  background: #f7f2e8;
+  position: sticky;
+  top: 0;
+  z-index: 20;
+}
+
+/* Updated to look like a brand but act like a link */
+.navbarBrand {
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: #5b3b24;
+  text-decoration: none;
+  padding: 4px 8px;
+  border-radius: 4px;
+}
+
+.navbarBrand:focus-visible {
+  outline: 3px solid var(--focus-ring);
+  outline-offset: 4px;
+  color: #bc5920;
+}
+
+.navbarBrand:hover {
+  color: #bc5920;
+}
+
+.navbarLinks {
+  display: flex;
+  gap: 24px;
+  align-items: center;
+}
+
+.navbarLinks a,
+.logoutLink {
+  text-decoration: none;
+  color: #4a3527;
+  font-weight: 600;
+  transition: 0.2s ease;
+  background: none;
+  border: none;
+  font-size: 1rem;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 4px;
+}
+
+.navbarLinks a:hover,
+.logoutLink:hover {
+  color: #c46027;
+}
+
+.navbarLinks a:focus-visible,
+.logoutLink:focus-visible {
+  outline: 3px solid var(--focus-ring);
+  outline-offset: 4px;
+}

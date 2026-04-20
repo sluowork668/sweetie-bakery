@@ -108,6 +108,7 @@ function AdminOrdersPage() {
                 </td>
                 <td>
                   <button 
+                    tabIndex="0" /* FORCES OS TO TAB HERE */
                     onClick={() => handleDelete(order._id)} 
                     className={styles.deleteBtn}
                     aria-label={`Delete order for ${order.customerName || 'Guest'}`}

@@ -29,13 +29,12 @@
   --bg-warm: #FDFBF7; 
   --text-dark: #3E2723; 
   
-  /* Global Approval & Cancel Colors (Rubric Requirement) */
+  /* Global Approval & Cancel Colors */
   --approve-bg: #28a745;
   --approve-hover: #218838;
   --cancel-bg: #dc3545;
   --cancel-hover: #c82333;
-  --focus-ring: #aa3bff; /* High-contrast focus outline */
-
+  --focus-ring: #bc5920;
 
   @media (max-width: 1024px) {
     font-size: 16px;
