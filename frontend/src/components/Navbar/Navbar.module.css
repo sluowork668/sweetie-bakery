@@ -19,15 +19,6 @@
   border-radius: 4px;
 }
 
-.navbarBrand:focus-visible {
-  outline: 3px solid var(--focus-ring);
-  outline-offset: 4px;
-  color: #bc5920;
-}
-
-.navbarBrand:hover {
-  color: #bc5920;
-}
 
 .navbarLinks {
   display: flex;
@@ -50,6 +41,7 @@
   border-radius: 4px;
 }
 
+.navbarBrand:hover,
 .navLink:hover,
 .logoutLink:hover {
   color: #c46027;
@@ -64,8 +56,10 @@
   text-underline-offset: 6px;
 }
 
+.navbarBrand:focus-visible,
 .navLink:focus-visible,
 .logoutLink:focus-visible {
   outline: 3px solid var(--focus-ring);
   outline-offset: 4px;
+  color: #bc5920;
 }
