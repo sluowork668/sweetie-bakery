@@ -2,6 +2,10 @@ import PropTypes from 'prop-types';
 import './ProductFilter.css';
 
 function ProductFilter({ categories, selectedCategory, onCategoryChange }) {
+  
+  const titleCase = (str) =>
+    str.replace(/\b\w/g, (c) => c.toUpperCase());
+
   return (
     <div className="product-filter">
       <label htmlFor="category">Filter by category:</label>
@@ -13,7 +17,7 @@ function ProductFilter({ categories, selectedCategory, onCategoryChange }) {
         <option value="all">All</option>
         {categories.map((category) => (
           <option key={category} value={category}>
-            {category}
+            {titleCase(category)}
           </option>
         ))}
       </select>
@@ -23,9 +27,7 @@ function ProductFilter({ categories, selectedCategory, onCategoryChange }) {
 
 ProductFilter.propTypes = {
   categories: PropTypes.arrayOf(PropTypes.string).isRequired,
-
   selectedCategory: PropTypes.string.isRequired,
-
   onCategoryChange: PropTypes.func.isRequired,
 };
 
