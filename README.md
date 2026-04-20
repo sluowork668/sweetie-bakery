@@ -8,7 +8,7 @@ Hazem Algendy & Shuwen Luo
 
 ## Page Deployment Link
 
-[TODO: Insert Deployment Link Here]
+http://3.22.235.29:5173
 
 ## Class Link
 
@@ -16,7 +16,7 @@ https://northeastern.instructure.com/courses/245751
 
 ## Design Document
 
-[TODO: Insert Design Document Link Here]
+https://docs.google.com/document/d/1CukWKklPPVcqSHUShNHj-RulOKrdzGu_GBMLZSII6ig/edit?usp=sharing
 
 ## Project Objective
 
@@ -28,7 +28,7 @@ To build a full-stack web application using React (Vite), Node.js, Express, and 
 
 ## Slides
 
-[TODO: Insert Slides Link Here]
+https://docs.google.com/presentation/d/1z1r2y2nH-nTADN2mbPylbIjRJRxy4EKsmX5LBqWwsJ0/edit?usp=sharing
 
 ## Demo Video
 
