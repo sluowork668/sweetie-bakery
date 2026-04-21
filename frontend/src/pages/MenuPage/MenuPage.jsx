@@ -8,7 +8,11 @@ function MenuPage() {
   const [selectedCategory, setSelectedCategory] = useState('all');
 
   useEffect(() => {
-    fetch('/api/products')
+    const productsUrl = import.meta.env.VITE_API_URL
+      ? `${import.meta.env.VITE_API_URL}/api/products`
+      : '/api/products';
+
+    fetch(productsUrl)
       .then((res) => res.json())
       .then((data) => {
         setProducts(data);
