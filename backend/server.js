@@ -15,8 +15,41 @@ const PORT = process.env.PORT || 3000;
 app.use(express.json({ limit: '50mb' }));
 app.use(express.urlencoded({ limit: '50mb', extended: true }));
 
+// --- CORS (minimal; no extra dependency) ---
+const STATIC_ALLOWED_ORIGINS = new Set([
+  'http://localhost:5173',
+  'https://sweetie-bakery.vercel.app',
+]);
+
+function isAllowedOrigin(origin) {
+  if (!origin) return false;
+  if (STATIC_ALLOWED_ORIGINS.has(origin)) return true;
+  if (!origin.startsWith('https://')) return false;
+  const host = origin.slice('https://'.length).split('/')[0].split(':')[0];
+  return host === 'vercel.app' || host.endsWith('.vercel.app');
+}
+
+app.use((req, res, next) => {
+  const origin = req.headers.origin;
+  if (origin && isAllowedOrigin(origin)) {
+    res.setHeader('Access-Control-Allow-Origin', origin);
+    res.setHeader('Access-Control-Allow-Credentials', 'true');
+  }
+  res.setHeader(
+    'Access-Control-Allow-Methods',
+    'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS'
+  );
+  res.setHeader(
+    'Access-Control-Allow-Headers',
+    'Content-Type, Authorization, X-Requested-With'
+  );
+  if (req.method === 'OPTIONS') {
+    return res.sendStatus(204);
+  }
+  next();
+});
+
 // --- PASSPORT & SESSION CONFIGURATION ---
-// No CORS library or headers used here.
 app.use(
   session({
     secret: 'sweetie-bakery-secret',
