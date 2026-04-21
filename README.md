@@ -32,7 +32,7 @@ https://docs.google.com/presentation/d/1z1r2y2nH-nTADN2mbPylbIjRJRxy4EKsmX5LBqWw
 
 ## Demo Video
 
-https://youtu.be/N8TZKrlbDsQ
+https://drive.google.com/file/d/1fCdSUfi8Q6imyE6mHBxMAcrutBganoox/view?usp=sharing
 
 ## Instructions to Build
 
