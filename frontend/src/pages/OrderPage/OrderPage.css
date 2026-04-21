@@ -7,6 +7,116 @@
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
+.order-page-success-only {
+  text-align: center;
+  padding: 3rem 2rem;
+}
+
+.order-summary-card {
+  border: 1px solid #eee;
+  border-radius: 8px;
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+  background: #fff8f8;
+}
+
+.order-summary-card h3 {
+  margin: 0 0 0.75rem;
+}
+
+.empty-cart-text {
+  margin: 0;
+  color: #777;
+}
+
+.order-item-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.order-item-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.order-item-row:last-child {
+  border-bottom: none;
+}
+
+.order-item-main {
+  min-width: 0;
+}
+
+.order-item-name {
+  margin: 0;
+  font-weight: 600;
+}
+
+.order-item-meta {
+  margin: 0.25rem 0 0;
+  color: #666;
+  font-size: 0.95rem;
+}
+
+.order-item-line-total {
+  margin: 0;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.order-item-qty {
+  display: flex;
+  align-items: center;
+}
+
+/* Same stepper style as the product cards */
+.qty-stepper {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.qty-stepper-btn {
+  width: 34px;
+  height: 34px;
+  border-radius: 999px;
+  border: 1px solid #ff8a8a;
+  background: #fff;
+  color: #d94848;
+  cursor: pointer;
+  font-size: 18px;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.qty-stepper-btn:hover {
+  background: #fff1f1;
+}
+
+.qty-stepper-value {
+  min-width: 20px;
+  text-align: center;
+  font-weight: 700;
+  color: #333;
+}
+
+.order-total-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid #e8e8e8;
+  margin-top: 0.75rem;
+  padding-top: 0.75rem;
+  font-size: 1.05rem;
+}
+
 .order-form {
   display: flex;
   flex-direction: column;
@@ -46,8 +156,46 @@
   background-color: #ff4757;
 }
 
-.success-message {
-  color: green;
-  font-weight: bold;
-  text-align: center;
+.submit-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.order-error {
+  border: 1px solid #ffbdbd;
+  background: #fff1f1;
+  color: #b42318;
+  padding: 10px 12px;
+  border-radius: 8px;
+  font-weight: 600;
+}
+
+.order-success {
+  border: 1px solid #b7ebc6;
+  background: #f0fff4;
+  color: #14532d;
+  padding: 2rem 1.5rem 1.75rem;
+  border-radius: 12px;
+  margin: 0 auto;
+  max-width: 520px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.order-success-icon {
+  line-height: 0;
+}
+
+.order-success-message {
+  margin: 0;
+  font-weight: 700;
+  font-size: 1.35rem;
+  line-height: 1.45;
+  max-width: 28ch;
+}
+
+.order-success-cta {
+  margin-top: 0.25rem;
 }

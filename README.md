@@ -43,7 +43,15 @@ This application is containerized using Docker for a seamless, self-contained en
 
 ### Setup Steps
 1. Clone the repository: `git clone <repo-url>`
-2. Navigate to the project folder: `cd sweetie-bakery`
-3. Build the images and start the containers: 
+2. Navigate to the project folder: `cd sweetie-bakery-1` (or the folder name you cloned into)
+3. Create a `.env` file in the project root (same folder as `compose.yaml`) with at least:
+   - `MONGODB_URI=mongodb://mongodb:27017`
+   - `DB_NAME=sweetie-bakery`
+4. Build the images and start the containers:
    ```bash
    docker compose up --build
+   ```
+5. Open the app at `http://localhost:5173`. To load menu data, seed the database once:
+   ```bash
+   docker compose exec backend npm run seed
+   ```

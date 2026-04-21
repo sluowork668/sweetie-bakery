@@ -1,4 +1,4 @@
-import { useState } from 'react'; // 1. Added this import
+import { useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar/Navbar';
 import HomePage from './pages/HomePage/HomePage';
@@ -10,7 +10,6 @@ import AdminOrdersPage from './pages/AdminOrdersPage/AdminOrdersPage';
 import LoginPage from './pages/LoginPage/LoginPage';
 
 function App() {
-  // 2. Define the state here. Initially, 'user' is null (logged out).
   const [user, setUser] = useState(null);
 
   return (

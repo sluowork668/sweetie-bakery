@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
 import styles from './AdminOrdersPage.module.css';
 
 function AdminOrdersPage() {
@@ -134,7 +133,5 @@ function AdminOrdersPage() {
     </main>
   );
 }
-
-AdminOrdersPage.propTypes = {};
 
 export default AdminOrdersPage;

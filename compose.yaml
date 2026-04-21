@@ -7,6 +7,8 @@ services:
     restart: unless-stopped
     volumes:
       - mongo-data:/data/db
+    networks:
+      - sweetie
 
   backend:
     build: ./backend
@@ -18,18 +20,28 @@ services:
     depends_on:
       - mongodb
     restart: unless-stopped
+    networks:
+      - sweetie
 
   frontend:
     build: ./frontend
     container_name: sweetie-frontend
     ports:
       - "5173:5173"
+    environment:
+      VITE_API_PROXY_TARGET: http://backend:3000
     depends_on:
       - backend
     volumes:
       - ./frontend/src:/app/src
       - ./frontend/public:/app/public
     restart: unless-stopped
+    networks:
+      - sweetie
+
+networks:
+  sweetie:
+    driver: bridge
 
 volumes:
   mongo-data:

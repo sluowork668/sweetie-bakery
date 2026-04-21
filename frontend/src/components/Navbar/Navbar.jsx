@@ -63,7 +63,10 @@ function Navbar({ user, setUser }) {
 }
 
 Navbar.propTypes = {
-  user: PropTypes.object,
+  user: PropTypes.oneOfType([
+    PropTypes.shape({ username: PropTypes.string.isRequired }),
+    PropTypes.oneOf([null]),
+  ]),
   setUser: PropTypes.func.isRequired,
 };
 
