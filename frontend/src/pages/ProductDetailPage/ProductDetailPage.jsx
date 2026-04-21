@@ -9,7 +9,11 @@ function ProductDetailPage() {
   const { addToCart, decrementFromCart, getItemQty } = useCart();
 
   useEffect(() => {
-    fetch(`/api/products/${id}`)
+    const productUrl = import.meta.env.VITE_API_URL
+      ? `${import.meta.env.VITE_API_URL}/api/products/${id}`
+      : `/api/products/${id}`;
+
+    fetch(productUrl)
       .then((res) => res.json())
       .then((data) => setProduct(data))
       .catch((err) => console.error('Failed to fetch product:', err));

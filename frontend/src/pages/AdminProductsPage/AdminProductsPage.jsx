@@ -2,7 +2,9 @@ import { useEffect, useMemo, useState } from 'react';
 import ProductForm from '../../components/ProductForm/ProductForm';
 import styles from './AdminProductsPage.module.css';
 
-const API_BASE_URL = '/api/products';
+const API_BASE_URL = import.meta.env.VITE_API_URL
+  ? `${import.meta.env.VITE_API_URL}/api/products`
+  : '/api/products';
 
 function AdminProductsPage() {
   const [products, setProducts] = useState([]);

@@ -12,7 +12,10 @@ function AdminOrdersPage() {
 
   const fetchOrders = async () => {
     try {
-      const response = await fetch('/api/orders');
+      const ordersUrl = import.meta.env.VITE_API_URL
+        ? `${import.meta.env.VITE_API_URL}/api/orders`
+        : '/api/orders';
+      const response = await fetch(ordersUrl);
       if (!response.ok) throw new Error('Failed to fetch orders');
       const data = await response.json();
       setOrders(data);
@@ -25,7 +28,10 @@ function AdminOrdersPage() {
 
   const handleStatusChange = async (id, newStatus) => {
     try {
-      const response = await fetch(`/api/orders/${id}`, {
+      const orderItemUrl = import.meta.env.VITE_API_URL
+        ? `${import.meta.env.VITE_API_URL}/api/orders/${id}`
+        : `/api/orders/${id}`;
+      const response = await fetch(orderItemUrl, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ status: newStatus }),
@@ -46,7 +52,10 @@ function AdminOrdersPage() {
   const handleDelete = async (id) => {
     if (!window.confirm('Are you sure you want to delete this order?')) return;
     try {
-      const response = await fetch(`/api/orders/${id}`, { method: 'DELETE' });
+      const orderItemUrl = import.meta.env.VITE_API_URL
+        ? `${import.meta.env.VITE_API_URL}/api/orders/${id}`
+        : `/api/orders/${id}`;
+      const response = await fetch(orderItemUrl, { method: 'DELETE' });
       if (response.ok) {
         setOrders(orders.filter((order) => order._id !== id));
       }

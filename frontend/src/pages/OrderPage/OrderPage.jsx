@@ -39,7 +39,11 @@ function OrderPage() {
         totalPrice,
       };
 
-      const response = await fetch('/api/orders', {
+      const ordersUrl = import.meta.env.VITE_API_URL
+        ? `${import.meta.env.VITE_API_URL}/api/orders`
+        : '/api/orders';
+
+      const response = await fetch(ordersUrl, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload),
