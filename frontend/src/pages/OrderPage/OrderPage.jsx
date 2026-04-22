@@ -4,7 +4,8 @@ import { useCart } from '../../useCart.js';
 import styles from './OrderPage.module.css';
 
 function OrderPage() {
-  const { cartItems, totalPrice, addToCart, decrementFromCart, clearCart } = useCart();
+  const { cartItems, totalPrice, addToCart, decrementFromCart, clearCart } =
+    useCart();
 
   const [formData, setFormData] = useState({
     customerName: '',
@@ -66,8 +67,14 @@ function OrderPage() {
 
   if (submitted) {
     return (
-      <main className={`${styles.orderPageContainer} ${styles.orderPageSuccessOnly}`}>
-        <section className={styles.orderSuccess} role="status" aria-live="polite">
+      <main
+        className={`${styles.orderPageContainer} ${styles.orderPageSuccessOnly}`}
+      >
+        <section
+          className={styles.orderSuccess}
+          role="status"
+          aria-live="polite"
+        >
           <div className={styles.orderSuccessIcon} aria-hidden="true">
             <svg
               viewBox="0 0 72 72"
@@ -176,7 +183,11 @@ function OrderPage() {
         </div>
       </section>
 
-      <form className={styles.orderForm} onSubmit={handleSubmit} aria-label="Checkout Form">
+      <form
+        className={styles.orderForm}
+        onSubmit={handleSubmit}
+        aria-label="Checkout Form"
+      >
         <div className={styles.formGroup}>
           <label htmlFor="customerName">Name:</label>
           <input
@@ -201,10 +212,12 @@ function OrderPage() {
             aria-required="true"
           />
         </div>
-        
+
         {/* Ensures screen readers announce submission errors automatically */}
         <div aria-live="assertive">
-          {submitError ? <div className={styles.orderError}>{submitError}</div> : null}
+          {submitError ? (
+            <div className={styles.orderError}>{submitError}</div>
+          ) : null}
         </div>
 
         <button

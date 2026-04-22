@@ -21,7 +21,11 @@ function ProductDetailPage() {
   }, [id]);
 
   if (!product) {
-    return <div className={styles.loadingText} aria-live="polite">Loading product details...</div>;
+    return (
+      <div className={styles.loadingText} aria-live="polite">
+        Loading product details...
+      </div>
+    );
   }
 
   const productId = String(product.id ?? product._id ?? id);
@@ -29,7 +33,12 @@ function ProductDetailPage() {
 
   return (
     <main className={styles.productDetailPage}>
-      <Link to="/menu" className={styles.backButton} tabIndex="0" aria-label="Go back to menu">
+      <Link
+        to="/menu"
+        className={styles.backButton}
+        tabIndex="0"
+        aria-label="Go back to menu"
+      >
         ← Back to Menu
       </Link>
 
@@ -43,7 +52,10 @@ function ProductDetailPage() {
         )}
 
         <h1>{product.name}</h1>
-        <section className={styles.detailMeta} aria-label="Product Specifications">
+        <section
+          className={styles.detailMeta}
+          aria-label="Product Specifications"
+        >
           <span className={styles.detailBadge}>
             ${Number(product.price).toFixed(2)}
           </span>
@@ -100,7 +112,11 @@ function ProductDetailPage() {
               −
             </button>
 
-            <span className={styles.qtyStepperValue} aria-live="polite" aria-label="Current quantity in cart">
+            <span
+              className={styles.qtyStepperValue}
+              aria-live="polite"
+              aria-label="Current quantity in cart"
+            >
               {qty}
             </span>
 

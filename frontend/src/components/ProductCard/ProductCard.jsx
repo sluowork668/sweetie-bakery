@@ -11,8 +11,8 @@ function ProductCard({ product }) {
 
   return (
     <article className={styles.productCard}>
-      <Link 
-        to={`/products/${productRouteId}`} 
+      <Link
+        to={`/products/${productRouteId}`}
         className={styles.productCardLink}
         tabIndex="0"
         aria-label={`View details for ${product.name}`}
@@ -24,7 +24,9 @@ function ProductCard({ product }) {
         />
         <h3>{product.name}</h3>
         <p className={styles.productCategory}>{product.category}</p>
-        <p className={styles.productPrice}>${Number(product.price).toFixed(2)}</p>
+        <p className={styles.productPrice}>
+          ${Number(product.price).toFixed(2)}
+        </p>
         <p className={styles.productDescription}>{product.description}</p>
       </Link>
 
@@ -47,7 +49,11 @@ function ProductCard({ product }) {
             −
           </button>
 
-          <span className={styles.qtyStepperValue} aria-live="polite" aria-label="Current quantity in cart">
+          <span
+            className={styles.qtyStepperValue}
+            aria-live="polite"
+            aria-label="Current quantity in cart"
+          >
             {qty}
           </span>
 
