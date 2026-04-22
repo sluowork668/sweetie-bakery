@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import './ProductCard.css';
+import styles from './ProductCard.module.css';
 import { useCart } from '../../useCart.js';
 
 function ProductCard({ product }) {
@@ -10,58 +10,62 @@ function ProductCard({ product }) {
   const qty = getItemQty(productId);
 
   return (
-    <Link to={`/products/${productRouteId}`} className="product-card-link">
-      <div className="product-card">
+    <article className={styles.productCard}>
+      <Link 
+        to={`/products/${productRouteId}`} 
+        className={styles.productCardLink}
+        tabIndex="0"
+        aria-label={`View details for ${product.name}`}
+      >
         <img
           src={product.imageUrl || '/images/products/default.jpg'}
           alt={product.name}
-          className="product-card-image"
+          className={styles.productCardImage}
         />
-
         <h3>{product.name}</h3>
-        <p className="product-category">{product.category}</p>
-        <p className="product-price">${Number(product.price).toFixed(2)}</p>
-        <p className="product-description">{product.description}</p>
+        <p className={styles.productCategory}>{product.category}</p>
+        <p className={styles.productPrice}>${Number(product.price).toFixed(2)}</p>
+        <p className={styles.productDescription}>{product.description}</p>
+      </Link>
 
-        <div className="product-card-actions">
-          <div
-            className="qty-stepper"
-            aria-label={`Quantity selector for ${product.name}`}
+      <div className={styles.productCardActions}>
+        <div
+          className={styles.qtyStepper}
+          aria-label={`Quantity selector for ${product.name}`}
+        >
+          <button
+            type="button"
+            className={styles.qtyStepperBtn}
+            aria-label="Decrease quantity"
+            disabled={qty === 0}
+            tabIndex="0"
+            onClick={(e) => {
+              e.preventDefault();
+              decrementFromCart(productId);
+            }}
           >
-            <button
-              type="button"
-              className="qty-stepper-btn"
-              aria-label="Decrease quantity"
-              disabled={qty === 0}
-              onClick={(e) => {
-                e.preventDefault();
-                e.stopPropagation();
-                decrementFromCart(productId);
-              }}
-            >
-              −
-            </button>
+            −
+          </button>
 
-            <span className="qty-stepper-value" aria-label="Current quantity">
-              {qty}
-            </span>
+          <span className={styles.qtyStepperValue} aria-live="polite" aria-label="Current quantity in cart">
+            {qty}
+          </span>
 
-            <button
-              type="button"
-              className="qty-stepper-btn"
-              aria-label="Increase quantity"
-              onClick={(e) => {
-                e.preventDefault();
-                e.stopPropagation();
-                addToCart(product);
-              }}
-            >
-              +
-            </button>
-          </div>
+          <button
+            type="button"
+            className={styles.qtyStepperBtn}
+            aria-label="Increase quantity"
+            tabIndex="0"
+            onClick={(e) => {
+              e.preventDefault();
+              addToCart(product);
+            }}
+          >
+            +
+          </button>
         </div>
       </div>
-    </Link>
+    </article>
   );
 }
 
@@ -74,7 +78,6 @@ ProductCard.propTypes = {
     price: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
     description: PropTypes.string,
     imageUrl: PropTypes.string,
-    // --- Updated to match new Schema ---
     ingredients: PropTypes.string,
     allergens: PropTypes.string,
     calories: PropTypes.number,

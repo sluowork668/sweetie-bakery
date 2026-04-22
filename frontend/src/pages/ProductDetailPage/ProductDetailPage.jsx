@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import './ProductDetailPage.css';
+import PropTypes from 'prop-types';
+import styles from './ProductDetailPage.module.css';
 import { useCart } from '../../useCart.js';
 
 function ProductDetailPage() {
@@ -20,99 +21,105 @@ function ProductDetailPage() {
   }, [id]);
 
   if (!product) {
-    return <p className="loading-text">Loading...</p>;
+    return <div className={styles.loadingText} aria-live="polite">Loading product details...</div>;
   }
 
   const productId = String(product.id ?? product._id ?? id);
   const qty = getItemQty(productId);
 
   return (
-    <div className="product-detail-page">
-      <Link to="/menu" className="back-button">
+    <main className={styles.productDetailPage}>
+      <Link to="/menu" className={styles.backButton} tabIndex="0" aria-label="Go back to menu">
         ← Back to Menu
       </Link>
 
-      <div className="product-detail-card">
+      <article className={styles.productDetailCard}>
         {product.imageUrl && (
           <img
             src={product.imageUrl}
             alt={product.name}
-            className="detail-image"
+            className={styles.detailImage}
           />
         )}
 
         <h1>{product.name}</h1>
-        <div className="detail-meta">
-          <span className="detail-badge">
+        <section className={styles.detailMeta} aria-label="Product Specifications">
+          <span className={styles.detailBadge}>
             ${Number(product.price).toFixed(2)}
           </span>
           <span
-            className="detail-badge"
+            className={styles.detailBadge}
             style={{ textTransform: 'capitalize' }}
           >
             {product.category}
           </span>
           <span
-            className={`detail-badge detail-stock ${product.inStock ? 'in-stock' : 'out-of-stock'}`}
+            className={`${styles.detailBadge} ${styles.detailStock} ${product.inStock ? styles.inStock : styles.outOfStock}`}
           >
             {product.inStock ? 'In Stock' : 'Out of Stock'}
           </span>
           {product.calories > 0 && (
-            <span className="detail-badge">{product.calories} Cal</span>
+            <span className={styles.detailBadge}>{product.calories} Cal</span>
           )}
-        </div>
+        </section>
 
-        {product.ingredients && (
-          <p className="detail-info-row">
-            <strong>Ingredients:</strong> {product.ingredients}
-          </p>
-        )}
-        {product.allergens && (
-          <p className="detail-info-row detail-allergens">
-            <strong>Allergens:</strong> {product.allergens}
-          </p>
-        )}
-        {product.flavorProfile && (
-          <p className="detail-info-row">
-            <strong>Flavor Profile:</strong> {product.flavorProfile}
-          </p>
-        )}
-        {product.description && (
-          <p className="detail-description">{product.description}</p>
-        )}
+        <section aria-label="Ingredients and Flavors">
+          {product.ingredients && (
+            <p className={styles.detailInfoRow}>
+              <strong>Ingredients:</strong> {product.ingredients}
+            </p>
+          )}
+          {product.allergens && (
+            <p className={`${styles.detailInfoRow} ${styles.detailAllergens}`}>
+              <strong>Allergens:</strong> {product.allergens}
+            </p>
+          )}
+          {product.flavorProfile && (
+            <p className={styles.detailInfoRow}>
+              <strong>Flavor Profile:</strong> {product.flavorProfile}
+            </p>
+          )}
+          {product.description && (
+            <p className={styles.detailDescription}>{product.description}</p>
+          )}
+        </section>
 
-        <div className="detail-actions">
+        <div className={styles.detailActions}>
           <div
-            className="qty-stepper"
+            className={styles.qtyStepper}
             aria-label={`Quantity selector for ${product.name}`}
           >
             <button
               type="button"
-              className="qty-stepper-btn"
+              className={styles.qtyStepperBtn}
               aria-label="Decrease quantity"
               disabled={qty === 0}
+              tabIndex="0"
               onClick={() => decrementFromCart(productId)}
             >
               −
             </button>
 
-            <span className="qty-stepper-value" aria-label="Current quantity">
+            <span className={styles.qtyStepperValue} aria-live="polite" aria-label="Current quantity in cart">
               {qty}
             </span>
 
             <button
               type="button"
-              className="qty-stepper-btn"
+              className={styles.qtyStepperBtn}
               aria-label="Increase quantity"
+              tabIndex="0"
               onClick={() => addToCart(product)}
             >
               +
             </button>
           </div>
         </div>
-      </div>
-    </div>
+      </article>
+    </main>
   );
 }
+
+ProductDetailPage.propTypes = {};
 
 export default ProductDetailPage;

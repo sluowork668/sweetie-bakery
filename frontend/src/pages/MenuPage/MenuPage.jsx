@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import ProductCard from '../../components/ProductCard/ProductCard';
 import ProductFilter from '../../components/ProductFilter/ProductFilter';
-import './MenuPage.css';
+import styles from './MenuPage.module.css';
 
 function MenuPage() {
   const [products, setProducts] = useState([]);
@@ -32,7 +32,7 @@ function MenuPage() {
   }, [products, selectedCategory]);
 
   return (
-    <div className="menu-page">
+    <main className={styles.menuPage}>
       <h1>Sweetie Bakery Menu</h1>
 
       <ProductFilter
@@ -42,17 +42,17 @@ function MenuPage() {
       />
 
       {filteredProducts.length === 0 ? (
-        <div className="no-products">
+        <div className={styles.noProducts} aria-live="polite">
           No real products available in this category.
         </div>
       ) : (
-        <div className="product-grid">
+        <section className={styles.productGrid} aria-label="Product Menu">
           {filteredProducts.map((product) => (
             <ProductCard key={product._id} product={product} />
           ))}
-        </div>
+        </section>
       )}
-    </div>
+    </main>
   );
 }
 

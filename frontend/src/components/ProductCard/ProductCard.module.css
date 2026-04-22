@@ -1,0 +1,107 @@
+.productCard {
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  padding: 16px;
+  background: white;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  transition: background-color 0.2s ease, transform 0.2s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.productCard:hover {
+  transform: translateY(-2px);
+  background: #fffbeb;
+}
+
+/* We separate the link so it doesn't wrap the buttons */
+.productCardLink {
+  text-decoration: none;
+  color: inherit;
+  flex-grow: 1; /* Pushes the cart buttons to the bottom */
+  border-radius: 8px;
+}
+
+.productCardLink:focus-visible {
+  outline: 3px solid var(--focus-ring);
+  outline-offset: 4px;
+}
+
+.productCardImage {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-bottom: 12px;
+}
+
+.productCard h3 {
+  margin: 0 0 8px;
+  font-size: 1.2rem;
+}
+
+.productCategory {
+  color: #777;
+  margin-bottom: 8px;
+  text-transform: capitalize;
+}
+
+.productPrice {
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+.productDescription {
+  color: #444;
+  line-height: 1.4;
+}
+
+.productCardActions {
+  margin-top: 12px;
+  display: flex;
+  justify-content: flex-end;
+  border-top: 1px solid #f0e6d8;
+  padding-top: 12px;
+}
+
+.qtyStepper {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.qtyStepperBtn {
+  width: 34px;
+  height: 34px;
+  border-radius: 999px;
+  border: 1px solid #ff8a8a;
+  background: #fff;
+  color: #d94848;
+  cursor: pointer;
+  font-size: 18px;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.qtyStepperBtn:hover:not(:disabled) {
+  background: #fff1f1;
+}
+
+.qtyStepperBtn:focus-visible {
+  outline: 3px solid var(--focus-ring);
+  outline-offset: 2px;
+}
+
+.qtyStepperBtn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.qtyStepperValue {
+  min-width: 20px;
+  text-align: center;
+  font-weight: 700;
+  color: #333;
+}

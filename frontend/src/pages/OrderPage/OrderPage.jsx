@@ -1,10 +1,10 @@
 import { useState } from 'react';
+import PropTypes from 'prop-types';
 import { useCart } from '../../useCart.js';
-import './OrderPage.css';
+import styles from './OrderPage.module.css';
 
 function OrderPage() {
-  const { cartItems, totalPrice, addToCart, decrementFromCart, clearCart } =
-    useCart();
+  const { cartItems, totalPrice, addToCart, decrementFromCart, clearCart } = useCart();
 
   const [formData, setFormData] = useState({
     customerName: '',
@@ -66,9 +66,9 @@ function OrderPage() {
 
   if (submitted) {
     return (
-      <div className="order-page-container order-page-success-only">
-        <div className="order-success" role="status" aria-live="polite">
-          <div className="order-success-icon" aria-hidden="true">
+      <main className={`${styles.orderPageContainer} ${styles.orderPageSuccessOnly}`}>
+        <section className={styles.orderSuccess} role="status" aria-live="polite">
+          <div className={styles.orderSuccessIcon} aria-hidden="true">
             <svg
               viewBox="0 0 72 72"
               width="72"
@@ -86,65 +86,69 @@ function OrderPage() {
               />
             </svg>
           </div>
-          <p className="order-success-message">
+          <p className={styles.orderSuccessMessage}>
             Thank you! Your order has been placed successfully.
           </p>
           <button
             type="button"
-            className="submit-btn order-success-cta"
+            className={`${styles.submitBtn} ${styles.orderSuccessCta}`}
             onClick={() => setSubmitted(false)}
+            tabIndex="0"
           >
             Place Another Order
           </button>
-        </div>
-      </div>
+        </section>
+      </main>
     );
   }
 
   return (
-    <div className="order-page-container">
+    <main className={styles.orderPageContainer}>
       <h2>Place an Order</h2>
-      <section className="order-summary-card">
+      <section className={styles.orderSummaryCard} aria-label="Cart Summary">
         <h3>Your Cart</h3>
 
         {cartItems.length === 0 ? (
-          <p className="empty-cart-text">Your cart is currently empty.</p>
+          <p className={styles.emptyCartText}>Your cart is currently empty.</p>
         ) : (
-          <ul className="order-item-list">
+          <ul className={styles.orderItemList}>
             {cartItems.map((item) => (
-              <li key={item.productId} className="order-item-row">
-                <div className="order-item-main">
-                  <p className="order-item-name">{item.name}</p>
-                  <p className="order-item-meta">
+              <li key={item.productId} className={styles.orderItemRow}>
+                <div className={styles.orderItemMain}>
+                  <p className={styles.orderItemName}>{item.name}</p>
+                  <p className={styles.orderItemMeta}>
                     ${item.price.toFixed(2)} each
                   </p>
                 </div>
 
-                <div className="order-item-qty">
+                <div className={styles.orderItemQty}>
                   <div
-                    className="qty-stepper"
+                    className={styles.qtyStepper}
                     aria-label={`Quantity selector for ${item.name}`}
                   >
                     <button
                       type="button"
-                      className="qty-stepper-btn"
+                      className={styles.qtyStepperBtn}
                       aria-label="Decrease quantity"
+                      tabIndex="0"
                       onClick={() => decrementFromCart(item.productId)}
                     >
                       −
                     </button>
 
                     <span
-                      className="qty-stepper-value"
+                      className={styles.qtyStepperValue}
                       aria-label="Current quantity"
+                      aria-live="polite"
                     >
                       {item.qty}
                     </span>
 
                     <button
                       type="button"
-                      className="qty-stepper-btn"
+                      className={styles.qtyStepperBtn}
                       aria-label="Increase quantity"
+                      tabIndex="0"
                       onClick={() =>
                         addToCart({
                           id: item.productId,
@@ -158,7 +162,7 @@ function OrderPage() {
                   </div>
                 </div>
 
-                <p className="order-item-line-total">
+                <p className={styles.orderItemLineTotal}>
                   ${(item.price * item.qty).toFixed(2)}
                 </p>
               </li>
@@ -166,14 +170,14 @@ function OrderPage() {
           </ul>
         )}
 
-        <div className="order-total-row">
+        <div className={styles.orderTotalRow}>
           <span>Total</span>
           <strong>${totalPrice.toFixed(2)}</strong>
         </div>
       </section>
 
-      <form className="order-form" onSubmit={handleSubmit}>
-        <div className="form-group">
+      <form className={styles.orderForm} onSubmit={handleSubmit} aria-label="Checkout Form">
+        <div className={styles.formGroup}>
           <label htmlFor="customerName">Name:</label>
           <input
             type="text"
@@ -182,9 +186,10 @@ function OrderPage() {
             value={formData.customerName}
             onChange={handleChange}
             required
+            aria-required="true"
           />
         </div>
-        <div className="form-group">
+        <div className={styles.formGroup}>
           <label htmlFor="email">Email:</label>
           <input
             type="email"
@@ -193,19 +198,28 @@ function OrderPage() {
             value={formData.email}
             onChange={handleChange}
             required
+            aria-required="true"
           />
         </div>
-        {submitError ? <div className="order-error">{submitError}</div> : null}
+        
+        {/* Ensures screen readers announce submission errors automatically */}
+        <div aria-live="assertive">
+          {submitError ? <div className={styles.orderError}>{submitError}</div> : null}
+        </div>
+
         <button
           type="submit"
-          className="submit-btn"
+          className={styles.submitBtn}
           disabled={cartItems.length === 0}
+          tabIndex="0"
         >
           {submitting ? 'Placing Order...' : 'Place Order'}
         </button>
       </form>
-    </div>
+    </main>
   );
 }
+
+OrderPage.propTypes = {};
 
 export default OrderPage;
