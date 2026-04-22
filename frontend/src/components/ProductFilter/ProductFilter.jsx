@@ -1,16 +1,18 @@
 import PropTypes from 'prop-types';
-import './ProductFilter.css';
+import styles from './ProductFilter.module.css';
 
 function ProductFilter({ categories, selectedCategory, onCategoryChange }) {
   const titleCase = (str) => str.replace(/\b\w/g, (c) => c.toUpperCase());
 
   return (
-    <div className="product-filter">
-      <label htmlFor="category">Filter by category:</label>
+    <div className={styles.productFilter}>
+      <label htmlFor="categorySelector">Filter by category:</label>
       <select
-        id="category"
+        id="categorySelector"
+        className={styles.select}
         value={selectedCategory}
         onChange={(e) => onCategoryChange(e.target.value)}
+        aria-label="Filter products by category"
       >
         <option value="all">All</option>
         {categories.map((category) => (
